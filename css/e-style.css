@@ -1,0 +1,49 @@
+.e-box{
+    box-sizing:border-box;
+}
+.e-bor-1{
+    border:1px solid #ddd;
+}
+.e-bg-w{
+    background: #fff;
+}
+.e-form{
+    font-size: 14px; padding-top:20px;
+}
+.e-form .e-line{
+    margin-bottom:20px;
+}
+.e-form .e-label{
+    display: inline-block; min-width:7%; text-align: right;
+}
+.e-form input[type=text],.e-form input[type=password]{
+    width:90%; border:1px solid #ddd; line-height:30px; border-radius:2px; text-indent:6px;
+}
+.e-form input[type=checkbox],.e-form input[type=radio]{
+    vertical-align:bottom; margin-right:3px;
+}
+.e-form textarea{
+    width:90%; border-color:#ddd;
+}
+.e-form .e-btn{
+    line-height:30px; border-radius:4px; background-color: #008cd7; color: #fff; letter-spacing:2px; padding:0 22px; margin-right:10px;
+    border:1px solid transparent; cursor: pointer;
+}
+.e-form .e-btn.default{
+    color: #333; border-color: #ccc; background: #fff;
+}
+.e-form .e-btn.default:hover{
+    color: #333; background-color: #e6e6e6; border-color: #adadad;
+}
+.e-form .e-btn.success{
+    color: #fff; border-color: #4cae4c; background: #5cb85c;
+}
+.e-form .e-btn.success:hover{
+    color: #fff; background-color: #449d44; border-color: #398439;
+}
+.e-form .e-btn.danger{
+    color: #fff; border-color: #d9534f; background: #d9534f;
+}
+.e-form .e-btn.danger:hover{
+    color: #fff; background-color: #ac2925; border-color: #c9302c;
+}

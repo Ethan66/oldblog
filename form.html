@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form表格</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/e-style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <div class="e-form e-box e-bg-w e-bor-1">
+        <form>
+            <div class="e-line">
+                <label class="e-label" for="username">姓名：</label>
+                <input id="username" type="text" name="username" placeholder="请输入您的姓名" />
+            </div>
+            <div class="e-line">
+                <label class="e-label" for="password">密码：</label>
+                <input id="password" type="password" name="password" placeholder="请输入您的密码" />
+            </div>
+            <div class="e-line">
+                <label class="e-label">爱好：</label>
+                <input id="read" type="checkbox" name="hobby" value="read" /><label for="read">读书</label>
+                <input id="music" type="checkbox" name="hobby" value="music" /><label for="music">音乐</label>
+                <input id="movie" type="checkbox" name="hobby" value="movie" /><label for="movie">电影</label>
+            </div>
+            <div class="e-line">
+                <label class="e-label">性别：</label>
+                <input id="man" type="radio" name="sex" value="男" /><label for="man">男</label>
+                <input id="woman" type="radio" name="sex" value="女" /><label for="woman">女</label>
+            </div>
+            <div class="e-line">
+                <label class="e-label">选择文件：</label>
+                <input type="file" name="myfile" />
+            </div>
+            <div class="e-line">
+                <label class="e-label">城市：</label>
+                <select name="city">
+                    <option value="beijing">北京</option>
+                    <option value="shanghai" selected>上海</option>
+                    <option value="guangzhou">广州</option>
+                    <option value="hangzhou">杭州</option>
+                </select>
+            </div>
+            <div class="e-line">
+                <label class="e-label"></label>
+                <textarea name="art-cle" cols="30" rows="10"></textarea>
+            </div>
+            <div class="e-line">
+                <label class="e-label"></label>
+                <input type="hidden" name="csrf" value="sdfsdfdsf" />
+            </div>
+            <div class="e-line" style="margin-top: -30px;">
+                <label class="e-label"></label>
+                <input class="e-btn default" type="button" value="点击" />
+                <input class="e-btn success" type="submit" value="提交" />
+                <input class="e-btn danger" type="reset" value="重置" />
+            </div>
+        </form>
+    </div>
+</body>
+</html>
