@@ -7,6 +7,8 @@
 .e-bg-w{
     background: #fff;
 }
+
+/*表格*/
 .e-form{
     font-size: 14px; padding-top:20px;
 }
@@ -46,4 +48,25 @@
 }
 .e-form .e-btn.danger:hover{
     color: #fff; background-color: #ac2925; border-color: #c9302c;
+}
+
+/*遮罩层*/
+.e-shade{
+    width:100%; height:100%; position: fixed; top:0; left:0; background-color: rgba(0,0,0,.3); z-index:1000;
+}
+.e-shadeWrap{
+    min-width:600px; background-color: #fff; position: absolute; top:50%; left:50%; margin-left:-250px; margin-top:-160px;
+    box-shadow:0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.e-shadeWrap .e-head{
+    line-height:2.8; font-size:20px; text-indent:16px; background-color: #009688; color: #fff; position: relative;
+}
+.e-shadeWrap .e-head span{
+    display: inline-block; position: absolute; right:16px; top:-8px; font-weight:normal; font-size:24px;
+}
+.e-shadeWrap .e-content{
+    padding:20px; line-height:2; font-size:16px;
+}
+.e-shadeWrap .e-foot{
+    background-color: #009688; color: #fff; line-height:3; text-indent:16px; font-size:18px;
 }
