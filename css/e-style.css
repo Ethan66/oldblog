@@ -62,7 +62,7 @@
     line-height:2.8; font-size:20px; text-indent:16px; background-color: #009688; color: #fff; position: relative;
 }
 .e-shadeWrap .e-head span{
-    display: inline-block; position: absolute; right:16px; top:-8px; font-weight:normal; font-size:24px;
+    display: inline-block; position: absolute; right:16px; top:-8px; font-weight:normal; font-size:24px; cursor:pointer;
 }
 .e-shadeWrap .e-content{
     padding:20px; line-height:2; font-size:16px;
