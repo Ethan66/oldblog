@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>圣杯布局</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/e-style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style type="text/css">
+        .clearfix:after{
+            display: block; content: ''; clear: both;
+        }
+        #content{
+            padding: 0 120px 0 160px;
+        }
+        #content .main{
+            width: 100%; height: 600px; background-color: red; float: left;
+        }
+        #content .left{
+            width: 150px; height: 200px; background-color: yellow; float: left; margin-left: -100%; position: relative; left:-160px;
+        }
+        #content .right{
+            width: 110px; height: 200px; background-color: yellow; float: left; margin-left: -110px; position: relative; right: -120px;
+        }
+        #footer{
+            height: 60px; background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="content" class="clearfix">
+        <div class="main">内容</div>
+        <div class="left">左边</div>
+        <div class="right">右边</div>
+    </div>
+    <div id="footer">尾部</div>
+</body>
+</html>
