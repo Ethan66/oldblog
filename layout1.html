@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单栏布局</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/e-style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style type="text/css">
+        body{
+            min-width:960px;
+        }
+        .layout{
+            max-width:960px; margin:0 auto;
+        }
+        #header{
+            height:60px; background-color:#F1F0F1;
+        }
+        #content{
+            height:600px; background-color:blue;
+        }
+        #footer{
+            height:50px; background-color:yellow;
+        }
+        #header .layout{
+            text-align: center; font-size:0; height: 100%;
+        }
+        #header .layout:before{
+            display: inline-block; content: ""; height: 100%; border-right: 1px solid transparent; vertical-align: middle;
+        }
+        #header .layout:after{
+            display: inline-block; content: ""; height: 100%; border-right: 1px solid transparent; vertical-align: middle;
+        }
+        #header .btn{
+            display: inline-block; border:1px solid #ccc; background-color: transparent; outline:0; padding: 8px 10px; font-size:14px;
+            border-right:0; vertical-align: middle; cursor: pointer;
+        }
+        #header .btn:first-child{
+            border-radius: 3px 0 0 3px;
+        }
+        #header .btn:last-child{
+            border-right:1px solid #ccc; border-radius: 0 3px 3px 0;
+        }
+        #header .btn:hover{
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div class="layout">
+            <button class="btn">HTML</button>
+            <button class="btn">CSS</button>
+            <button class="btn">JAVASCRIPT</button>
+        </div>
+    </div>
+    <div id="content" class="layout">
+        内容
+    </div>
+    <div id="footer">
+        <div class="layout">尾部</div>
+    </div>
+</body>
+</html>
