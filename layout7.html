@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微博</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/e-style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style type="text/css">
+        .clearfix:after{
+            display: block; content: ""; clear: both;
+        }
+        .clearfix{
+            *display: inline; *zoom: 1;
+        }
+        .omit{
+            overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+        }
+        .inlineB{
+            *display: inline !important; *zoom: 1;
+        }
+        .microblog{
+            border-top: 2px solid #ddd; border-bottom: 2px solid #ddd; padding: 20px 0; font-family: microsoft yahei;
+        }
+        .microblog{
+            max-width:1270px; margin-left: 10px; margin-top: 20px;
+        }
+        .microblog .text{
+            max-width:930px; display: inline-block; vertical-align: middle;
+        }
+        .microblog .text .head{
+            margin-bottom: 10px;
+        }
+        .microblog .text .head .pic{
+            max-width: 64px; height: 64px; border-radius: 50%; border: 2px solid #ddd; float: left; overflow: hidden;
+        }
+        .microblog .text .head img{
+            width: 100%;
+        }
+        .microblog .text .head .right{
+            margin-left: 64px; font-size: 20px; font-weight: bold; line-height: 64px;
+        }
+        .microblog .text .head .name{
+            margin: 0 10px;
+        }
+        .microblog .text .head .time{
+            color: #ddd; font-style: normal;
+        }
+        .microblog .text .content h2{
+            font-size: 30px; line-height: 1.5; margin-bottom: 10px;
+        }
+        .microblog .text .content .txt1{
+            font-size: 24px; line-height: 2; margin-bottom: 20px;
+        }
+        .microblog .text .content .tick span{
+            font-size:14px; padding: 3px 6px; border: 1px solid; color: #F2907F; border-radius: 3px; float: left;
+            letter-spacing: 1px;
+        }
+        .microblog>.img{
+            display: inline-block; max-width: 298px; margin-left: 30px; border-radius: 6px; overflow: hidden; vertical-align: middle;
+        }
+        .microblog>.img img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="microblog clearfix">
+        <div class="text inlineB">
+            <div class="head clearfix">
+                <p class="pic">
+                    <img src="https://ooo.0o0.ooo/2017/06/13/593f79d19974c.jpg" />
+                </p>
+                <p class="right">
+                    <span class="name">林志莫</span>
+                    <i class="time">8小时</i>
+                </p>
+            </div>
+            <div class="content">
+                <h2>坚持读书这些年，人生真是太幸福了！</h2>
+                <p class="txt1 omit">2017.5.23前几天，在国内大学的朋友给我发来微信。她说：5年前，刚进大学的时候，我们是一样的起点，如果当时我和你一样坚持不断地坚持学习并让自己获得更大成就感和自豪感</p>
+                <p class="tick"><span>读书</span></p>
+            </div>
+        </div>
+        <div class="img inlineB">
+            <img src="https://ooo.0o0.ooo/2017/06/13/593f79d1d1266.jpg" />
+        </div>
+    </div>
+</body>
+</html>
