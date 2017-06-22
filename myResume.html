@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简历</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/e-style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style type="text/css">
+        body{
+            font-family: microsoft yahei;
+        }
+        .layout{
+            max-width: 1080px; margin: 10px auto; min-width: 840px;
+        }
+        #resume{
+            background-color: #fff; box-shadow: 0 5px 12px 2px #aaa; padding: 40px;
+        }
+        #resume .title{
+            font-size: 24px; line-height: 2.5; border-bottom: 4px solid #aaa; max-width: 50%;
+        }
+        .clearfix:after{
+            display: block; content: ""; clear: both;
+        }
+        #resume .brief{
+            padding: 0 20px;
+        }
+        #resume .brief .header-name{
+            float: left; width: 50%; min-width: 340px; text-align: center;
+        }
+        #resume .brief .img, #resume .brief .name{
+            display: inline-block; *display: inline; *zoom: 1; vertical-align: middle;
+        }
+        #resume .brief .img{
+            max-width: 160px; height: 160px; border-radius: 50%; border: 2px solid #ddd; overflow: hidden; margin-right: 20px;
+        }
+        #resume .brief .img img{
+            width: 100%;
+        }
+        #resume .brief .name{
+            height: 210px; padding-top: 70px; box-sizing: border-box;
+        }
+        #resume .brief .name .surname{
+            font-size: 42px; letter-spacing: 10px;
+        }
+        #resume .brief .name .profession{
+            font-size: 20px; color: #666; line-height: 1.5;
+        }
+        #resume .brief .info{
+            margin-left: 50%; line-height: 2; font-size: 16px;
+        }
+        #resume .brief .info .title{
+            max-width: 100%; margin-bottom: 20px;
+        }
+        #resume .brief .info .add{
+
+        }
+    </style>
+</head>
+<body>
+    <div id="resume" class="layout e-box">
+        <div class="brief clearfix">
+            <div class="header-name">
+                <div class="img">
+                    <img src="https://ooo.0o0.ooo/2017/06/13/593f79d19974c.jpg" />
+                </div>
+                <div class="name">
+                    <p class="surname">庄成</p>
+                    <p class="profession">前端工程师</p>
+                </div>
+            </div>
+            <div class="info">
+                <h2 class="title">基本信息</h2>
+                <p class="add">地址：浙江省杭州市</p>
+                <p class="tel">电话：15158108601</p>
+                <p class="email">邮箱：425734130@qq.com</p>
+                <p class="blog">博客：425734130@qq.com</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
