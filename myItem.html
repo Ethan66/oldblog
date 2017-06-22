@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的项目</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/e-style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style type="text/css">
+        body{
+            font-family: microsoft yahei; background-color: #fff2e3;
+        }
+        .layout{
+            max-width: 800px; margin: 0 auto;
+        }
+        #header{
+            text-align: center; color: #87968e; letter-spacing: 0.6px;
+        }
+        #header h1{
+            padding: 30px 0; font-size: 42px;
+        }
+        #header .brief{
+            font-size: 14px; margin-top: 10px; opacity: 0.6;
+        }
+        #content{
+            margin-top: 30px;
+        }
+        #content .btn{
+            padding: 8px 16px; background-color: #72b890; color: #fff; border-radius: 2px;
+        }
+        #content .btn:hover{
+            opacity: 0.7; text-decoration: none;
+        }
+        #content .nav{
+            font-size: 0; margin-left: -10px; text-align: center; margin-bottom: 40px;
+        }
+        #content .nav li{
+            display: inline-block; font-size: 14px; margin-left: 10px; *display: inline; *zoom: 1;
+        }
+        #content .nav li a{
+            display: block;
+        }
+        #content .nav li .active{
+            opacity: 0.7;
+        }
+        #content .preview .img{
+            text-align: center; margin-bottom: 34px;
+        }
+        #content .preview .img img{
+            max-width: 400px;
+        }
+        #content .btn_w{
+            text-align: center; margin-left: -10px;
+        }
+        #content .btn_w .btn{
+            border: none; outline: 0; margin-left: 10px;
+        }
+        #footer{
+            margin-top: 30px;
+        }
+        #footer .author{
+            text-align: center; font-size: 14px;
+        }
+        #footer .author a{
+            color: #72b890;
+        }
+        #footer .author a:hover{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="header" class="layout">
+        <h1>我的项目</h1>
+        <p class="brief">一句话项目介绍</p>
+    </div>
+    <div id="content" class="layout">
+        <ul class="nav">
+            <li><a href="#" class="btn active">项目1</a></li>
+            <li><a class="btn" href="#">项目2</a></li>
+            <li><a class="btn" href="#">项目3</a></li>
+            <li><a class="btn" href="#">项目4</a></li>
+            <li><a class="btn" href="#">项目5</a></li>
+        </ul>
+        <div class="preview">
+            <p class="img">
+                <img src="http://7xpvnv.com2.z0.glb.qiniucdn.com/65d4aba2-a097-4b24-aaa0-ebbaf7eedab2" />
+            </p>
+        </div>
+        <div class="btn_w">
+            <a href="#" class="btn">查看源码</a>
+            <a href="#" class="btn">使用说明</a>
+        </div>
+    </div>
+    <div id="footer" class="layout">
+        <p class="author">作者：<a href="#">我</a></p>
+    </div>
+
+</body>
+</html>
