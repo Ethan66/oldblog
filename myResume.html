@@ -52,8 +52,55 @@
         #resume .brief .info .title{
             max-width: 100%; margin-bottom: 20px;
         }
-        #resume .brief .info .add{
-
+        #resume .experience .title{
+            border-bottom: 2px solid #333; line-height: 2; margin-bottom: 30px;
+        }
+        #resume .experience li{
+            margin-left: 20px; padding-left: 50px; border-left: 2px solid #000; position: relative;
+        }
+        #resume .experience li:before{
+            display: block; content: ""; background-color: #000; width: 10px; height: 10px; border-radius: 50%;
+            position: absolute; left: -6px; top: 0;
+        }
+        #resume .experience .company{
+            font-size: 18px; margin-bottom: 20px;
+        }
+        #resume .experience .company i{
+            font-style: normal; margin-left: 20px; color: #666;
+        }
+        #resume .experience .text{
+            font-size: 17px; line-height: 1.5; padding-bottom: 30px;
+        }
+        #resume .experience li:last-child .text{
+            padding-bottom: 0;
+        }
+        #resume .experience>div{
+            margin-top: 30px;
+        }
+        #resume .other{
+            margin-top: 30px;
+        }
+        #resume .other>div{
+            width: 44%; float: left;
+        }
+        #resume .other .skill{
+            float: right;
+        }
+        #resume .other .title{
+            max-width: 100%;
+        }
+        #resume .other li{
+            margin-top: 20px; padding-left: 70px; position: relative;
+        }
+        #resume .other li:before{
+            display: block; content: "+"; width: 22px; height: 22px; line-height: 19px; text-align: center; border: 1px solid #333; border-radius: 50%;
+            font-size: 16px; position: absolute; left: 10px; top: 6px;
+        }
+        #resume .other li h3{
+            font-size: 18px; line-height: 1.5;
+        }
+        #resume .other li .text{
+            font-size: 14px; line-height: 1.5;
         }
     </style>
 </head>
@@ -77,13 +124,92 @@
                 <p class="blog">博客：425734130@qq.com</p>
             </div>
         </div>
+        <div class="experience">
+            <div class="work">
+                <h2 class="title">工作经历</h2>
+                <ul>
+                    <li>
+                        <h3 class="company"><span>深圳贝尔信科技有限公司</span>/<i>2015-2017</i></h3>
+                        <p class="text">
+                            公司从事智慧城市，智慧酒店，智慧商业城等的大型系统集成项目建设业务，本人配合业务部门，调查挖掘客户需求，撰写技术方案文档，
+                            项目施工管理，现场为施工人员提供技术指导和安装调试，派遣到项目地为客户提供技术服务，客户培训，及售后服务工作。
+                        </p>
+                    </li>
+                    <li>
+                        <h3 class="company"><span>深圳贝尔信科技有限公司</span>/<i>2015-2017</i></h3>
+                        <p class="text">
+                            公司从事智慧城市，智慧酒店，智慧商业城等的大型系统集成项目建设业务，本人配合业务部门，调查挖掘客户需求，撰写技术方案文档，
+                            项目施工管理，现场为施工人员提供技术指导和安装调试，派遣到项目地为客户提供技术服务，客户培训，及售后服务工作。
+                        </p>
+                    </li>
+                    <li>
+                        <h3 class="company"><span>深圳贝尔信科技有限公司</span>/<i>2015-2017</i></h3>
+                        <p class="text">
+                            公司从事智慧城市，智慧酒店，智慧商业城等的大型系统集成项目建设业务，本人配合业务部门，调查挖掘客户需求，撰写技术方案文档，
+                            项目施工管理，现场为施工人员提供技术指导和安装调试，派遣到项目地为客户提供技术服务，客户培训，及售后服务工作。
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="education">
+                <h2 class="title">工作经历</h2>
+                <ul>
+                    <li>
+                        <h3 class="company"><span>荆州教育</span>/<i>2015-2017</i></h3>
+                        <p class="text">
+                            专业：信息与计算科学
+                        </p>
+                    </li>
+                    <li>
+                        <h3 class="company"><span>荆州教育</span>/<i>2015-2017</i></h3>
+                        <p class="text">
+                            专业：信息与计算科学
+                        </p>
+                    </li>
+                    <li>
+                        <h3 class="company"><span>荆州教育</span>/<i>2015-2017</i></h3>
+                        <p class="text">
+                            专业：信息与计算科学
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="other clearfix">
+            <div class="activity">
+                <h2 class="title">公益活动</h2>
+                <ul>
+                    <li>
+                        <h3>VOLUNTEER</h3>
+                        <p class="text">claritas est etiam processus dynamicus,quisequitur mutationem consuetudium lectorum.</p>
+                    </li>
+                    <li>
+                        <h3>VOLUNTEER</h3>
+                        <p class="text">claritas est etiam processus dynamicus,quisequitur mutationem consuetudium lectorum.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="skill">
+                <h2 class="title">职业技能</h2>
+                <ul>
+                    <li>
+                        <h3>VOLUNTEER</h3>
+                        <p class="text">claritas est etiam processus dynamicus,quisequitur mutationem consuetudium lectorum.</p>
+                    </li>
+                    <li>
+                        <h3>VOLUNTEER</h3>
+                        <p class="text">claritas est etiam processus dynamicus,quisequitur mutationem consuetudium lectorum.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </body>
 </html>
 
 
-http://book.jirengu.com/jirengu-inc/jrg-renwu10/homework/%E9%9D%B3%E5%87%AF%E5%8D%9A/task14/task-14-2.html
+<!--http://book.jirengu.com/jirengu-inc/jrg-renwu10/homework/%E9%9D%B3%E5%87%AF%E5%8D%9A/task14/task-14-2.html-->
 
-https://jasontang123.github.io/myProject/task14-2/application.html
+<!--https://jasontang123.github.io/myProject/task14-2/application.html-->
 
-http://js.jirengu.com/pobujakelo/3
+<!--http://js.jirengu.com/pobujakelo/3-->
