@@ -71,8 +71,14 @@ body{
 #banner li .text a:hover{
     text-decoration: none;
 }
+#content .w-style{
+    padding: 150px 0; max-width: 1150px; margin-left: auto; margin-right: auto;
+}
+#content .bg-grey{
+    background-color: #f7f7f7;
+}
 #content .title{
-    text-align: center; padding-top: 1px; margin: 150px 0 40px;
+    text-align: center; padding-top: 1px; margin: 0 0 40px;
 }
 #content .title h3{
     font-size: 2.4em; text-transform: uppercase; font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -85,12 +91,97 @@ body{
     width: 33%; float: left;
 }
 #content .services .l-wrap li .img .icon{
-    width: 100px; height: 100px; border-radius: 50%; text-align: center; color: #fff; padding-top: 24px;
+    width: 100px; height: 100px; border-radius: 50%; text-align: center; color: #fff; padding-top: 24px; margin: 0 auto;
 }
 #content .services .l-wrap li .img i{
     font-size: 3em;
 }
 #content .services .l-wrap li .tit{
-    text-align: center; font-weight: bold;
+    text-align: center; font-weight: bold; margin: 20px 0; font-size: 1.2em;
 }
-
+#content .services .l-wrap li .text{
+    font-size: 0.9em; color: #777; text-align: center; line-height: 1.6;
+}
+#content .portfolio .l-wrap{
+    margin-right: -30px;
+}
+#content .portfolio .l-wrap li{
+    width: 33.3%; padding-right: 30px; float: left; margin-bottom: 30px;
+}
+#content .portfolio .l-wrap li .img a{
+    display: block; width: 100%; position: relative;
+}
+#content .portfolio .l-wrap li .img a:hover img{
+    opacity: .2;
+}
+#content .portfolio .l-wrap li .img a:hover i{
+    color: #fff;
+}
+#content .portfolio .l-wrap li .img a i{
+    position: absolute; top: 50%; left: 50%; font-size: 4em; margin-left: -32px; margin-top: -32px; color: transparent; transition: all 0.3s;
+}
+#content .portfolio .l-wrap li .img a img{
+    width: 100%; transition: all 0.3s;
+}
+#content .portfolio .l-wrap li .text{
+    padding: 20px 0; text-align: center; background-color: #fff;
+}
+#content .portfolio .l-wrap li .text .tit{
+    font-weight: bold; margin-bottom: 4px; font-size: 1.2em;
+}
+#content .portfolio .l-wrap li .text .notice{
+    font-style: italic; font-size: 0.9; color: #999;
+}
+#content .about .l-wrap li{
+    position: relative; padding-bottom: 130px;
+}
+#content .about .l-wrap li:before{
+    display: block; height: 100%; content: ""; border-left: 2px solid #f1f1f1; position: absolute; left: 50%; z-index: -1;
+    margin-left: -1px;
+}
+#content .about .l-wrap .img{
+    width: 170px; height: 170px; border-radius: 50%; border: 10px solid #f1f1f1; overflow: hidden;
+    margin: 0 auto;
+}
+#content .about .l-wrap .img img{
+    width: 100%;
+}
+#content .about .l-wrap .text{
+    width: 40%; position: absolute; top: 14px; right: 50%; text-align: right; margin-right: 130px; padding-left: 100px;
+    line-height: 1.5;
+}
+#content .about .l-wrap li:nth-child(even) .text{
+    right: 0; left: 50%; text-align: left;  margin-left: 30px; margin-right: 0;
+}
+#content .about .l-wrap .text .time{
+    font-weight: bold; font-size: 1.2em;
+}
+#content .about .l-wrap .text h4{
+    font-size: 1.2em; margin-bottom: 10px;
+}
+#content .about .l-wrap .text .content{
+    font-size: 0.9em;
+}
+#content .about .l-wrap li:last-child{
+    padding-bottom: 0;
+}
+#content .about .l-wrap li:last-child .img{
+    text-align: center; padding-top: 40px; background-color: #fec503; color: #fff; font-size: 1.3em; font-weight: bold;
+    text-transform: uppercase; line-height: 1.2; box-sizing: border-box;
+}
+#content .team .l-wrap li{
+    width: 33.3%; padding-right: 30px; text-align: center; float: left;
+}
+#content .team .l-wrap li .img{
+    width: 160px; height: 160px; border-radius: 50%; border: 10px solid #fff; overflow: hidden;
+    margin: 0  auto 20px;
+}
+#content .team .l-wrap li .img img{
+    width: 100%;
+}
+#content .team .l-wrap li .text h4{
+    font-size: 1.2em; margin-bottom: 10px;
+}
+#content .team .l-wrap li .text p{
+    color: #999; font-size: 0.8em;
+}
