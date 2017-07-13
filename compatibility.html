@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/e-style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="box1">
+      <button class="btn1">DOM</button>
+      <button class="btn2">IE</button>
+  </div>
+  <div class="box2">
+      <button class="btn1">DOM</button>
+      <button class="btn2">IE</button>
+      <button class="btn3">DOM</button>
+  </div>
+  <div class="box3">
+      <button class="btn1">DOM</button>
+      <button class="btn2">IE</button>
+  </div>
+  <div class="box4">
+      <button class="btn1">DOM</button>
+      <button class="btn2">IE</button>
+  </div>
+  <div class="box5">
+      <button class="btn1">DOM</button>
+      <button class="btn2">IE</button>
+  </div>
+  <script>
+      //事件处理程序
+      /*var box1=document.querySelector(".box1");
+      var box1btn1=document.querySelector(".box1 .btn1");
+      var box1btn2=document.querySelector(".box1 .btn2");
+      var show=function(e){
+          console.log(this);
+          console.log(this.innerText);
+          console.log(e.target);
+      }
+
+      //1、DOM2事件处理程序,this指向的是node,触发事件时产生的对象为event
+      box1btn1.addEventListener("click",show);
+      box1.addEventListener("click",show);
+      box1.removeEventListener("click",show);
+      //IE事件处理程序，this指的是window,触发事件时产生的对象为window.event
+      box1btn2.attachEvent("onclick",show);
+      box1.attachEvent("onclick",show);
+      box1btn2.detachEvent("onclick",show);*/
+
+      //2、当事件处理程序有参数时，event对象怎么传入函数中
+      var box2=document.querySelector(".box2");
+      var box2btn1=document.querySelector(".box2 .btn1");
+      var box2btn2=document.querySelector(".box2 .btn2");
+      var box2btn3=document.querySelector(".box2 .btn3");
+      var show2_1=function(e,x){
+          console.log(this);
+          console.log(this.innerText);
+          console.log(e);
+          console.log(e.target);
+          console.log(x);
+      }
+      var show2_2=function(e){
+          show2_1(e,1);
+      }
+      var show2_3=function(){
+          show2_1(window.event,1);
+      }
+//      var show2_4=show2_1.bind(box2btn3,event,1);     //不能直接使用,bind()里面传递的都为实参，此时event的作用域为全局，所以console.log(event)显示的时候为undefined,
+      //event赋值给了e,e也显示为undefined, 但是在show2_1里存在event,是因为show2_1的作用域找不到event,就会跳到上一级找，直到找到事件触发时候产生的event对象
+      var show2_4=function(){
+          (show2_1.bind(box2btn3,event,1))();           //bind()返回新的函数，this指向第一个参数，第二个参数开始是传递给show2_1的参数，event为undefined,\
+          // 当事件触发时产生event对象，bind里的event找上一级event对象就获取了它，所以显示成功
+      }
+      box2btn1.addEventListener("click",show2_2,false);    //触发事件时会产生一个event对象，传入到show1事件处理程序中，执行show1时，e=event,show(e,1)实际是show(event,1),\
+      // 再执行show(event,1);this指向全局作用域
+      box2btn2.attachEvent("onclick",show2_3);             //触发事件时会产生一个event对象，show2_1(window.event,1)都是实参，所以执行不会报错，但是this指向全局作用域
+      box2btn3.addEventListener("click",show2_4);
+
+
+      /*//兼容DOM2和IE事件处理程序，缺点：this没都指向node
+       var box3=document.querySelector(".box3");
+       var box3btn1=document.querySelector(".box3 .btn1");
+       var box3btn2=document.querySelector(".box3 .btn2");
+      var addEvent=function(node,type,handle){
+          if(!node){
+              return false;
+          }
+          if(node.addEventListener){
+              node.addEventListener(type,handle,false);
+              return true;
+          }
+          else if(node.attachEvent){
+              node.attachEvent('on'+type,handle);
+              return true;
+          }
+          return false;
+      }
+      addEvent(box3btn1,"click",show);
+      addEvent(box3btn2,"click",show);*/
+
+      /*//兼容DOM2和IE事件处理程序的同时让this都指向node
+       var box4=document.querySelector(".box4");
+       var box4btn1=document.querySelector(".box4 .btn1");
+       var box4btn2=document.querySelector(".box4 .btn2");
+      var addEvent=function(node,type,handle){
+          if(!node){
+              return false;
+          }
+          if(node.addEventListener){
+              node.addEventListener(type,handle,false);
+              return true;
+          }
+          else if(node.attachEvent){
+              var handle1=function(){
+                  handle.apply(node);
+              }
+              node.attachEvent('on'+type,handle1);
+              return true;
+          }
+          return false;
+      }
+      addEvent(box4btn1,"click",show);*/
+
+      /*//兼容DOM2和IE事件处理程序的同时让this指向node,window.event赋值给e
+       var box5=document.querySelector(".box5");
+       var box5btn1=document.querySelector(".box5 .btn1");
+       var box5btn2=document.querySelector(".box5 .btn2");
+      var addEvent=function(node,type,handle){
+          if(!node){
+              return false;
+          }
+          if(node.addEventListener){
+              node.addEventListener(type,handle,false);
+              return true;
+          }
+          else if(node.attachEvent){
+              node['e'+type+handle]=handle;
+              node[type+handle]=function(){
+                  node['e'+type+handle](window.event);
+              }
+              node.attachEvent("on"+type,node[type+handle]);
+              return true;
+          }
+          return false;
+      }
+       var removeEvent=function(node,type,handle){
+           if(!node){
+                return false;
+           }
+           if(node.removeEventListener){
+                node.removeEventListener(type,handle,false);
+                return true;
+           }
+           else if(node.detachEvent){
+                node.detachEvent("on"+type,handle[type+handle]);
+                handle[type+handle]=null;
+                return true;
+           }
+           return false;
+       }
+      addEvent(btn,"click",show);*/
+  </script>
+</body>
+</html>
