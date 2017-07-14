@@ -10,6 +10,9 @@
         .text{
             max-width:600px; line-height:2; font-size:36px; font-weight:bold; margin:20px auto 0;
         }
+        .btn button{
+            padding: 3px 8px; font-size: 14px; border-radius:2px; cursor:pointer; outline:0; border: none; border: 1px solid #aaa;
+        }
     </style>
 </head>
 <body>
@@ -19,7 +22,10 @@
         <p>这是页面内容</p>
         <p>这是页面内容</p>
     </div>
-    <div class="e-shade">
+    <div class="btn">
+        <button>click me</button>
+    </div>
+    <div class="e-shade none">
         <div class="e-shadeWrap">
             <h2 class="e-head">头部<span>×</span></h2>
             <div class="e-content">
@@ -31,5 +37,48 @@
             </div>
         </div>
     </div>
+    <script>
+        function $$(x){
+            return document.querySelectorAll(x);
+        }
+        function addEvent(node,type,handler){
+            if(!node) return false;
+            if(node.addEventListener){
+                node.addEventListener(type,handler,false);
+                return true;
+            }
+            else if(node.attachEvent){
+                node["e"+type+handler]=handler;
+                node[type+handler]=function(){
+                    node["e"+type+handler](window.event);
+                }
+                node.attachEvent("on"+type,node[type+handler]);
+                return true;
+            }
+            return false;
+        }
+        function getEvent(e){
+            return e||window.event;
+        }
+        function stopPropagation(e){
+            if(e.stopPropagation){
+                e.stopPropagation();
+            }
+            else e.returnValue=false;
+        }
+        function show(){
+            $$(".e-shade")[0].classList.remove("none");
+        }
+        function hide(e){
+            $$(".e-shade")[0].classList.add("none");
+        }
+        addEvent($$(".btn button")[0],"click",show);
+        addEvent($$(".e-shade")[0],"click",hide);
+        addEvent($$(".e-shadeWrap .e-head span")[0],"click",hide);
+        addEvent($$(".e-shadeWrap")[0],"click",function(e){
+            var newEvent=getEvent(e);
+            stopPropagation(newEvent);
+        });
+    </script>
 </body>
 </html>
