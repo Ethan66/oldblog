@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+  <button id="btn">open a window</button>
+  <button class="btn1">获取a</button>
+  <!--<script>
+      //弹出一个新页面
+      window.document.write(Math.random());
+      var btn=document.querySelector("#btn");
+      btn.addEventListener("click",function(e){
+          var f="height=500px,width=500px,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes";
+          window.open("iframe.html","_blank",f);
+      });
+  </script>-->
+
+  <script>
+      //弹出一个新页面，在屏幕中间
+      window.document.write(Math.random());
+      window.$=function(){
+          let arr=[];
+          return arr;
+      }
+      $.bom={
+          openAtCenter:function(width,height,url){
+              var x=screen.width/2-width/2;
+              var y=screen.height/2-height/2;
+              window.open(url,"_blank","width="+width+"px,height="+height+"px,screenX="+x+"px,screenY="+y+"px");
+          }
+      }
+      document.getElementsByTagName("button")[0].addEventListener("click",function(){
+          $.bom.openAtCenter(800,600,"iframe.html");
+
+      });
+  </script>
+</body>
+</html>
