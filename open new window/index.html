@@ -39,5 +39,29 @@
 
       });
   </script>
+
+  <script>
+      //获取a的值
+      document.getElementsByClassName("btn1")[0].addEventListener("click",function(){
+          console.log(getValue("b"));
+      });
+      function getValue(name,value){
+          if(value===undefined) {
+              var search=location.search;
+              if(search[0]==="?"){
+                  var searchArr=location.search.slice(1).split("&");
+              }
+              var obj={};
+              for(var i=0;i<searchArr.length;i++){
+                  var arr=searchArr[i].split("=");
+                  obj[arr[0]]=arr[1];
+              }
+              return obj[name];
+          }
+          else {
+              
+          }
+      };
+  </script>
 </body>
 </html>
