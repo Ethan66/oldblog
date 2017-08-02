@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/e-style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style type="text/css">
+        .clearfix:after{
+            display: block; content: ""; clear: both;
+        }
+        .clearfix{
+            *display: inline; *zoom: 1;
+        }
+        .omit{
+            overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+        }
+        .inlineB{
+            *display: inline !important; *zoom: 1;
+        }
+        .microblog{
+            border-top: 2px solid #ddd; border-bottom: 2px solid #ddd; padding: 20px 0; font-family: microsoft yahei;
+        }
+        .microblog{
+            max-width:1270px; margin-left: 10px; margin-top: 20px;
+        }
+        .microblog .text{
+            max-width:930px; display: inline-block; vertical-align: middle;
+        }
+        .microblog .text .head{
+            margin-bottom: 10px;
+        }
+        .microblog .text .head .pic{
+            max-width: 64px; height: 64px; border-radius: 50%; border: 2px solid #ddd; float: left; overflow: hidden;
+        }
+        .microblog .text .head img{
+            width: 100%;
+        }
+        .microblog .text .head .right{
+            margin-left: 64px; font-size: 20px; font-weight: bold; line-height: 64px;
+        }
+        .microblog .text .head .name{
+            margin: 0 10px;
+        }
+        .microblog .text .head .time{
+            color: #ddd; font-style: normal;
+        }
+        .microblog .text .content h2{
+            font-size: 30px; line-height: 1.5; margin-bottom: 10px;
+        }
+        .microblog .text .content .txt1{
+            font-size: 24px; line-height: 2; margin-bottom: 20px;
+        }
+        .microblog .text .content .tick span{
+            font-size:14px; padding: 3px 6px; border: 1px solid; color: #F2907F; border-radius: 3px; float: left;
+            letter-spacing: 1px;
+        }
+        .microblog>.img{
+            display: inline-block; max-width: 298px; margin-left: 30px; border-radius: 6px; overflow: hidden; vertical-align: middle;
+        }
+        .microblog>.img img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="microblog clearfix" id="max">
+        <div class="text inlineB">
+            <div class="head clearfix">
+                <p class="pic">
+                    <img src="https://ooo.0o0.ooo/2017/06/13/593f79d19974c.jpg" />
+                </p>
+                <p class="right">
+                    <span class="name">林志莫</span>
+                    <i class="time">8小时</i>
+                </p>
+            </div>
+            <div class="content">
+                <h2>坚持读书这些年，人生真是太幸福了！</h2>
+                <p class="txt1 omit">2017.5.23前几天，在国内大学的朋友给我发来微信。她说：5年前，刚进大学的时候，我们是一样的起点，如果当时我和你一样坚持不断地坚持学习并让自己获得更大成就感和自豪感</p>
+                <p class="tick"><span>读书</span></p>
+            </div>
+        </div>
+        <div class="img inlineB">
+            <img src="https://ooo.0o0.ooo/2017/06/13/593f79d1d1266.jpg" />
+        </div>
+        <div class="box"></div>
+        <div class="btnBox">
+            <button class="btn1">点我</button>
+        </div>
+        <div class="btnBox">
+            <button class="btn1">点我</button>
+        </div>
+        <ul class="ct">
+            <li>你好</li>
+            <li>我是</li>
+            <li>过儿</li>
+        </ul>
+        <input class="ipt-add-content" placeholder="添加内容"/>
+        <button id="btn-add-start">开头添加</button>
+        <button id="btn-add-end">结尾添加</button>
+    </div>
+    <script>
+        var div1=document.getElementsByClassName("name");
+        var max1=document.getElementById("max");
+        /*var title=document.title;
+        console.log(title);
+        document.title="微博demo";
+        console.log(document.doctype);
+        console.log(div1);
+        console.log(max.innerText);
+        console.log(max.innerHTML);
+        console.log(max1.innerText);
+        console.log(max1.innerHTML);*/
+        console.log(max1.children);
+        console.log(max1.childNodes);
+        var b=document.createElement("a");
+        var aText=document.createTextNode("hello");
+        b.appendChild(aText);
+        max1.appendChild(b);
+//        b.appendChild(aText);
+        b.setAttribute("href","http://www.baidu.com");
+        b.removeAttribute("href");
+        var show=function(x,y){
+            console.log("div");
+            console.log(x);
+            console.log(y);
+        }
+        var fn =show.bind(1,2,3,4,5);
+
+        var show1=function(){
+            console.log("btn1");
+        }
+        var show2=function(){
+            console.log("btn2");
+        }
+        document.getElementsByClassName("btnBox")[0].addEventListener("click",fn);
+        document.getElementsByClassName("btn1")[0].addEventListener("click",show1);
+        document.getElementsByClassName("btnBox")[1].addEventListener("click",show,true);
+        document.getElementsByClassName("btn1")[1].addEventListener("click",show2,true);
+        var ctLi=document.querySelectorAll(".ct li");
+        var ct=document.querySelector(".ct");
+        var show1=function(e){
+            console.log(e.target.innerText);
+        }
+        ct.addEventListener("click",show1);
+        /*var show=function(){
+            console.log(this.innerText);
+        }
+        ctLi.forEach(function(value,index){
+            ctLi[index].addEventListener("click",show);
+        });*/
+        var $$=function(a){
+            if(a.length<1){
+                return;
+            }
+            var a1=a.substring(1);
+            if(a[0]==="#"){
+                return document.getElementById(a1);
+            }else if(a[0]==="."){
+                return document.getElementsByClassName(a1)[0];
+            }else{
+                return document.getElementsByTagName(a);
+            }
+        }
+
+        var addHead=function(){
+            var content=$$(".ipt-add-content").value;
+            var ctfirst=$$("li")[0];
+            var ct=$$(".ct");
+            var newContent=document.createTextNode(content);
+            var newLi=document.createElement("li");
+            newLi.appendChild(newContent);
+            ct.insertBefore(newLi,ctfirst);
+        }
+        var addEnd=function(){
+            var content=$$(".ipt-add-content").value;
+            var newLi=document.createElement("li");
+            var newContent=document.createTextNode(content);
+            newLi.appendChild(newContent);
+            var ct=$$(".ct");
+            ct.appendChild(newLi);
+
+        }
+        var btn_start=document.getElementById("btn-add-start");
+        var btn_end=document.getElementById("btn-add-end");
+        btn_start.addEventListener("click",addHead);
+        btn_end.addEventListener("click",addEnd);
+    </script>
+</body>
+</html>
