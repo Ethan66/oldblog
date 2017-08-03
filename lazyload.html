@@ -74,6 +74,7 @@
    </div>
    <script>
        var clock;
+       lazyRender();
        $(window).on("scroll",function(){
            if(clock) clearTimeout(clock);
           clock=setTimeout(function(){
