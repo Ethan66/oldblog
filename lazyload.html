@@ -74,25 +74,33 @@
    </div>
    <script>
        var clock;
-       $(window).scroll(function(){
-           if(clock) {clearTimeout(clock);}
-           clock=setTimeout(function(){
-               console.log("hello");
-               lazyRender();
-           },300);
+       $(window).on("scroll",function(){
+           if(clock) clearTimeout(clock);
+          clock=setTimeout(function(){
+              lazyRender();
+          },300);
        });
        function lazyRender(){
-           $(".lazyload").find("li").each(function(){
-               var $this=$(this);
-               var $thisImg=$this.find("img");
-               var offsetTop=$this.offset().top;
-               var windowHeight=$(window).height();
-               var scrollTop=$(window).scrollTop();
-               if(offsetTop>scrollTop&&offsetTop<scrollTop+windowHeight){
-                   if($thisImg.attr("src")===$thisImg.attr("data-src")) return;
-                   $($thisImg.attr("src",$thisImg.attr("data-src")));
+           $(".lazyload li img").each(function(){
+               if(checkShow($(this)) && !isloaded($(this)) ){
+                   loadImg($(this));
                }
            });
+       }
+       function checkShow($img){
+           var windowHeight=$(window).height();
+           var scrollTop=$(window).scrollTop();
+           var offsetTop=$img.offset().top;
+           if(offsetTop>scrollTop&&offsetTop<windowHeight+scrollTop){
+               return true;
+           }
+           return false;
+       }
+       function isloaded($img){
+           return $img.attr("src")===$img.attr("data-src");
+       }
+       function loadImg($img){
+           $img.attr("src",$img.attr("data-src"));
        }
    </script>
 </body>
