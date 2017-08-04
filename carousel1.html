@@ -74,73 +74,21 @@
        var imgWidth=$(".carousel").width();
        var imgCount=$(".carousel ul.img li").length;
        var $markLi=$(".carousel .mark li");
+       var $imgLi=$(".carousel ul.img li");
        var curId=0;
        var isAnimate=false;
-       !function addHtml(){
-           var first=$ulImg.children("li").first().clone();
-           var last=$ulImg.children("li").last().clone();
-           $ulImg.append(first);
-           $ulImg.children("li").first().before(last);
-           $ulImg.css({"width":imgWidth*(imgCount+2)});
-       }();
        playAuto();
-       $arrNext.on("click",function(){
-           playNext(1);
-       });
-       $arrPre.on("click",function(){
-           playPre(1);
-       });
-       $markLi.on("click",function(){
-           var index=$(this).index();
-           if(index<curId){
-               playPre(curId-index);
-           }
-           if(index>curId){
-               playNext(index-curId);
-           }
-           setBullet(index);
-       });
        function playAuto(){
-           var clock=setInterval(function(){
-               playNext(1);
+           setInterval(function(){
+               play(1);
            },2000);
-           $(".carousel").on("mouseenter",function(){
-              clearTimeout(clock);
-           });
-           $(".carousel").on("mouseleave",function(){
-               clock=setInterval(function(){
-                   playNext(1);
-               },2000);
-           });
        }
-       function playNext(len){
-           if(isAnimate) return;
-           isAnimate=true;
-           $ulImg.animate({"left":"-="+len*imgWidth},300,function(){
-               curId+=len;
-               if(curId===imgCount){
-                   len=1; $ulImg.css({"left":-len*imgWidth});
-                   curId=0;
-               };
-               setBullet(curId);
-               isAnimate=false;
-           });
-       };
-       function playPre(len){
-           if(isAnimate) return;
-           isAnimate=true;
-           $ulImg.animate({"left":"+="+len*imgWidth},300,function(){
-               curId-=len;
-               if(curId===-1){
-                   len=4; $ulImg.css({"left":-len*imgWidth});
-                   curId=3;
-               };
-               setBullet(curId);
-           });
-       };
-       function setBullet(index){
-           $markLi.removeClass("active").eq(index).addClass("active");
-       };
+       function play(len){
+           $imgLi.eq(curId).fadeOut(500);
+           curId+=len;
+           if(curId>imgCount-1) curId-=imgCount;
+           $imgLi.eq(curId).fadeIn(500);
+       }
    </script>
 </body>
 </html>
