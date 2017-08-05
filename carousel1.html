@@ -9,13 +9,13 @@
     <script src="js/jquery-1.11.3.js"></script>
     <style type="text/css">
         .carousel{
-            width: 310px; height: 233px; overflow: hidden; position: relative; margin: 60px auto;
+            width: 310px; height: 233px; overflow: hidden; margin: 60px auto; position: relative;
         }
         .carousel ul.img{
-            width: 1240px; font-size: 0; position: absolute; left: -310px;
+            width: 1240px; font-size: 0; position: relative;
         }
         .carousel ul.img li{
-            display: inline-block;
+            display: none; position: absolute;
         }
         .carousel ul.img li img{
             width: 310px;
@@ -68,6 +68,7 @@
        </ul>
    </div>
    <script>
+       var clock;
        var $arrPre=$(".carousel .arrow.pre");
        var $arrNext=$(".carousel .arrow.next");
        var $ulImg=$(".carousel ul.img");
@@ -76,18 +77,44 @@
        var $markLi=$(".carousel .mark li");
        var $imgLi=$(".carousel ul.img li");
        var curId=0;
-       var isAnimate=false;
-       playAuto();
+       var isAnimate=true;
+       play(0);                 //页面刚载入时先显示第一张
+       playAuto();             //页面全部加载完成2秒后执行play(1)
+       $arrNext.on("click",function(){
+          play(1);
+       });
+       $arrPre.on("click",function(){
+           play(-1);
+       });
+       $markLi.on("click",function(){
+           var index=$(this).index();
+           play(index-curId);
+       });
+       $(".carousel").on("mouseenter",function(){
+          clearTimeout(clock);              //打破setInterval，图片停止重复轮播
+       });
+       $(".carousel").on("mouseleave",function(){
+           playAuto();
+       });
        function playAuto(){
-           setInterval(function(){
+           clock=setInterval(function(){
                play(1);
            },2000);
        }
        function play(len){
+           if(!isAnimate) return;           //判断上一个轮播结束没，没有结束,不能执行play
+           isAnimate=false;
            $imgLi.eq(curId).fadeOut(500);
            curId+=len;
            if(curId>imgCount-1) curId-=imgCount;
-           $imgLi.eq(curId).fadeIn(500);
+           if(curId<0) curId=imgCount-1;
+           $imgLi.eq(curId).fadeIn(500,function(){
+               isAnimate=true;
+           });
+           setBullet(curId);
+       };
+       function setBullet(index){
+           $markLi.removeClass("active").eq(index).addClass("active");
        }
    </script>
 </body>
