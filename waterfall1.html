@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>瀑布流新闻加载</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/e-style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/jquery-1.11.3.js"></script>
+    <style type="text/css">
+        .waterfall ul{
+            position: relative;
+        }
+        .waterfall li{
+            width: 16%; margin: 0 10px 20px 0; padding: 10px; border: 1px solid #ccc; position: absolute; box-sizing: border-box;
+            transition: all .5s;
+        }
+        .waterfall li a{
+            display: block;
+        }
+        .waterfall li img{
+            width: 100%; margin-bottom: 20px;
+        }
+        .waterfall li h3{
+            font-size: 16px; border-bottom: 1px solid #ccc; padding-bottom: 10px;
+        }
+        .waterfall li .text{
+            color: #666; margin: 10px 0; line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+   <div class="waterfall">
+       <ul>
+           <li>
+               <a href="#">
+                   <p class="img">
+                       <img src="http:\/\/n.sinaimg.cn\/tech\/transform\/20170804\/-NOf-fyitamv4962875.jpg" />
+                   </p>
+                   <h3>上海首条全息影马路灯亮相</h3>
+                   <p class="text">2017年1月25日，上海张江地区出现了一条全息投影人行道。</p>
+               </a>
+           </li>
+           <li>
+               <a href="#">
+                   <p class="img">
+                       <img src="http:\/\/n.sinaimg.cn\/tech\/transform\/20170804\/-NOf-fyitamv4962875.jpg" />
+                   </p>
+                   <h3>上海首条全息影马路灯亮相</h3>
+                   <p class="text">2017年1月25日，上海张江地区出现了一条全息投影人行道。</p>
+               </a>
+           </li>
+       </ul>
+   </div>
+   <script>
+       var curPage=1;
+       var perPageCount=10;
+       getData(function(newsList){    //数据到达后执行函数
+           nodes=getNodes(newsList);  //把数据变为DOM结构保存到nodes中
+           waterFallPlace(nodes);   //把nodes用瀑布流形式放到页面中
+       });
+
+       $(window).on("scroll",function(){
+          if(isVisible($("#load"))){
+              getData(function(newsList){
+                  nodes=getNodes(newsList);
+                  waterFallPlace(nodes);
+              })
+          }
+       });
+
+       function getData(callback){
+           $.ajax({
+               url:"http://platform.sina.com.cn/slide/album_tech",
+               dataType:"jsonp",
+               jsonp:"jsoncallback",
+               data:{
+                   app_key:1271687855,
+                   num: perPageCount,
+                   page:curPage
+               }
+           }).done(function(ret){
+               if(ret && ret.status && ret.status.code==="0"){
+                   place(ret.data);   //若数据没问题，那么生成节点并摆放好位置
+                   curPage++
+               }else{
+                   console.log("get error data");
+               }
+           });
+       }
+   </script>
+</body>
+</html>
