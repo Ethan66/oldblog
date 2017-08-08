@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>导航</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/e-style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/jquery-1.11.3.js"></script>
+    <style type="text/css">
+        .waterfall ul{
+            position: relative;
+        }
+        .waterfall li{
+            display: inline-block; width: 200px; margin-right: 10px; margin-bottom: 10px; position: absolute;
+            transition: all 0.5s;
+        }
+        .waterfall li:nth-child(1){
+            height: 240px; background-color: #9DDA52;
+        }
+        .waterfall li:nth-child(2){
+            height: 200px; background-color: #3C2F3D;
+        }
+        .waterfall li:nth-child(3){
+            height: 230px; background-color: #2EAC6D;
+        }
+        .waterfall li:nth-child(4){
+            height: 280px; background-color: #9DDA52;
+        }
+        .waterfall li:nth-child(5){
+            height: 300px; background-color: #2EAC6D;
+        }
+        .waterfall li:nth-child(6){
+            height: 210px; background-color: #3C2F3D;
+        }
+        .waterfall li:nth-child(7){
+            height: 220px;  background-color: #2EAC6D;
+        }
+        .waterfall li:nth-child(8){
+            height: 295px;  background-color: #9DDA52;
+        }
+        .waterfall li:nth-child(9){
+            height: 272px;  background-color: #2EAC6D;
+        }
+        .waterfall li:nth-child(10){
+            height: 226px; background-color: #3C2F3D;
+        }
+        .waterfall li:nth-child(11){
+            height: 218px; background-color: #2EAC6D;
+        }
+        .waterfall li:nth-child(12){
+            height: 233px; background-color: #9DDA52;
+        }
+        .waterfall li:nth-child(13){
+            height: 266px; background-color: #2EAC6D;
+        }
+        .waterfall li:nth-child(14){
+            height: 251px; background-color: #3C2F3D;
+        }
+        .waterfall li:nth-child(15){
+            height: 249px; background-color: #2EAC6D;
+        }
+        .waterfall li:nth-child(16){
+            height: 224px; background-color: #9DDA52;
+        }
+        .waterfall li:nth-child(17){
+            height: 320px;  background-color: #2EAC6D;
+        }
+        .waterfall li:nth-child(18){
+            height: 370px; background-color: #3C2F3D;
+        }
+        .waterfall li:nth-child(19){
+            height: 340px; background-color: #2EAC6D;
+        }
+    </style>
+</head>
+<body>
+  <div class="waterfall">
+      <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+          <li>6</li>
+          <li>7</li>
+          <li>8</li>
+          <li>9</li>
+          <li>10</li>
+          <li>11</li>
+          <li>12</li>
+          <li>13</li>
+          <li>14</li>
+          <li>15</li>
+          <li>16</li>
+          <li>17</li>
+          <li>18</li>
+          <li>19</li>
+      </ul>
+  </div>
+  <script>
+      /*waterfall();
+      $(window).on("resize",function(){
+          waterfall();
+      });
+      function waterfall(){
+          var arr=[];
+          var colLength=Math.floor($(".waterfall").width()/$(".waterfall li").first().width());
+          for(var i=0;i<colLength;i++){
+              arr[i]=0;
+          }
+          var blockwidth=$(".waterfall li").first().outerWidth(true);
+          $(".waterfall li").each(function(){
+              var height=$(this).outerHeight(true);
+              var min=arr[0],j=0;
+              for(var i=1;i<arr.length;i++){
+                  if(arr[i]<min) {min=arr[i]; j=i;}
+              }
+              $(this).css({"top":arr[j],"left":j*blockwidth});
+              arr[j]+=height;
+          });
+      };*/
+
+      var Waterfall=(function(){
+          function init(){
+              waterfall();
+              $(window).on("resize",function(){
+                  waterfall();
+              });
+              function waterfall(){
+                  var arr=[];
+                  var colLength=Math.floor($(".waterfall").width()/$(".waterfall li").first().width());
+                  for(var i=0;i<colLength;i++){
+                      arr[i]=0;
+                  }
+                  var blockwidth=$(".waterfall li").first().outerWidth(true);
+                  $(".waterfall li").each(function(){
+                      var height=$(this).outerHeight(true);
+                      var min=arr[0],j=0;
+                      for(var i=1;i<arr.length;i++){
+                          if(arr[i]<min) {min=arr[i]; j=i;}
+                      }
+                      $(this).css({"top":arr[j],"left":j*blockwidth});
+                      arr[j]+=height;
+                  });
+              };
+          };
+          return {
+              init:init
+          }
+      })();
+      Waterfall.init();
+  </script>
+</body>
+</html>

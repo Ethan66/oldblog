@@ -56,8 +56,16 @@
        var curPage=1;
        var perPageCount=10;
        getData(function(newsList){    //数据到达后执行函数
-           nodes=getNodes(newsList);  //把数据变为DOM结构保存到nodes中
-           waterFallPlace(nodes);   //把nodes用瀑布流形式放到页面中
+           console.log(newsList);
+          /* nodes=getNodes(newsList);  //把数据变为DOM结构保存到nodes中
+           waterFallPlace(nodes);   //把nodes用瀑布流形式放到页面中*/
+          $.each(newsList,function(ind,new){
+              var $node=getNode(new);         //把数据变为DOM结构保存到nodes中
+              $node.find("img").load(function(){   //等图片加载完成后执行下面代码
+                 $(".waterfall").append($node);   //把数据添加到页面里
+                 waterFallPlace($node);   //对新添加的元素进行瀑布流放置
+              });
+           });
        });
 
        $(window).on("scroll",function(){
@@ -81,7 +89,7 @@
                }
            }).done(function(ret){
                if(ret && ret.status && ret.status.code==="0"){
-                   place(ret.data);   //若数据没问题，那么生成节点并摆放好位置
+                   callback(ret.data);   //若数据没问题，那么生成节点并摆放好位置
                    curPage++
                }else{
                    console.log("get error data");
