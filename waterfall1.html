@@ -12,7 +12,7 @@
             position: relative;
         }
         .waterfall li{
-            width: 16%; margin: 0 10px 20px 0; padding: 10px; border: 1px solid #ccc; position: absolute; box-sizing: border-box;
+            width: 300px; margin: 0 10px 20px 0; padding: 10px; border: 1px solid #ccc; position: absolute; box-sizing: border-box;
             transition: all .5s;
         }
         .waterfall li a{
@@ -27,12 +27,15 @@
         .waterfall li .text{
             color: #666; margin: 10px 0; line-height: 1.5;
         }
+        .waterfall .hidden{
+            width: 10px; height: 2px;
+        }
     </style>
 </head>
 <body>
    <div class="waterfall">
        <ul>
-           <li>
+           <!--<li>
                <a href="#">
                    <p class="img">
                        <img src="http:\/\/n.sinaimg.cn\/tech\/transform\/20170804\/-NOf-fyitamv4962875.jpg" />
@@ -49,31 +52,46 @@
                    <h3>上海首条全息影马路灯亮相</h3>
                    <p class="text">2017年1月25日，上海张江地区出现了一条全息投影人行道。</p>
                </a>
-           </li>
+           </li>-->
        </ul>
+       <p class="hidden"></p>
    </div>
    <script>
        var curPage=1;
        var perPageCount=10;
-       getData(function(newsList){    //数据到达后执行函数
-           console.log(newsList);
-          /* nodes=getNodes(newsList);  //把数据变为DOM结构保存到nodes中
-           waterFallPlace(nodes);   //把nodes用瀑布流形式放到页面中*/
-          $.each(newsList,function(ind,new){
-              var $node=getNode(new);         //把数据变为DOM结构保存到nodes中
-              $node.find("img").load(function(){   //等图片加载完成后执行下面代码
-                 $(".waterfall").append($node);   //把数据添加到页面里
-                 waterFallPlace($node);   //对新添加的元素进行瀑布流放置
-              });
+       var arr=[];
+       var curLength=Math.floor($(".waterfall").width()/300);
+       var isArrive=true;
+       for(var i=0;i<curLength;i++){
+           arr[i]=0;
+       }
+       var minHeight,curIndex;
+       var maxHeight;
+
+       start();
+
+       function start(){
+           if(!isArrive) return;
+           isArrive=false;
+           getData(function(newsList){    //数据到达后执行函数
+               console.log(newsList);
+               /* nodes=getNodes(newsList);  //把数据变为DOM结构保存到nodes中
+                waterFallPlace(nodes);   //把nodes用瀑布流形式放到页面中*/
+               $.each(newsList,function(ind,news){
+                   var $node=getNodes(news);         //把数据变为DOM结构保存到nodes中
+                   $node.find("img").load(function(){   //等图片加载完成后执行下面代码
+                       $(".waterfall ul").append($node);   //把数据添加到页面里
+                       waterFallPlace($node);   //对新添加的元素进行瀑布流放置
+                   });
+               });
+               isArrive=true;
            });
-       });
+       };
+
 
        $(window).on("scroll",function(){
-          if(isVisible($("#load"))){
-              getData(function(newsList){
-                  nodes=getNodes(newsList);
-                  waterFallPlace(nodes);
-              })
+          if(isVisible($(".waterfall .hidden"))){
+              start();
           }
        });
 
@@ -95,6 +113,41 @@
                    console.log("get error data");
                }
            });
+       }
+       //把数据变成DOM
+       function getNodes(obj){
+           var html='<li><a href="#"><p class="img">';
+           html+='<img src="'+obj.img_url+'"/></p>';
+           html+='<h3>'+obj.short_name+'</h3>';
+           html+='<p class="text">'+obj.short_intro+'</p></a></li>';
+           return $(html);
+       }
+       //瀑布流
+       function waterFallPlace($el){
+           minHeight=arr[0];curIndex=0;
+           maxHeight=arr[0];
+           for(var i=1;i<arr.length;i++){
+               if(minHeight>arr[i]) {minHeight=arr[i]; curIndex=i;}
+           }
+           $el.css({"left":curIndex*310,"top":minHeight});
+           arr[curIndex]+=$el.outerHeight(true);
+           //因为li设置了绝对定位，所以要对ul进行高度设置，设置最高的高度
+           for(var i=0;i<arr.length;i++){
+               if(maxHeight<arr[i]) {
+                   maxHeight=arr[i];
+               }
+           }
+           $(".waterfall ul").height(maxHeight);
+       }
+       //判断节点是否出现在屏幕可视范围内
+       function isVisible($el){
+           var windowHeight=$(window).height();
+           var offsetTop=$el.offset().top;
+           var scrollTop=$(window).scrollTop();
+           if(offsetTop>scrollTop&&offsetTop<windowHeight+scrollTop){
+               return true;
+           }
+           return false;
        }
    </script>
 </body>
