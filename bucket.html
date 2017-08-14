@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>木桶布局</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/e-style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/jquery-1.11.3.js"></script>
+    <style type="text/css">
+        .wrap{
+            margin: 0 auto;
+        }
+        .bucket{
+            width: 100%;
+        }
+        .bucket li{
+            margin-bottom: 10px; font-size: 0;
+        }
+        .bucket a{
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+  <div class="wrap">
+      <ul class="bucket">
+         <!-- <li class="row">
+              <a href="#">
+                  <img src="http://via.placeholder.com/350x150" />
+              </a>
+              <a href="#">
+                  <img src="http://via.placeholder.com/300x150" />
+              </a>
+              <a href="#">
+                  <img src="http://via.placeholder.com/250x150" />
+              </a>
+              <a href="#">
+                  <img src="http://via.placeholder.com/350x150" />
+              </a>
+          </li>
+          <li class="row">
+              <a href="#">
+                  <img src="http://via.placeholder.com/350x150" />
+              </a>
+              <a href="#">
+                  <img src="http://via.placeholder.com/300x150" />
+              </a>
+              <a href="#">
+                  <img src="http://via.placeholder.com/250x150" />
+              </a>
+              <a href="#">
+                  <img src="http://via.placeholder.com/350x150" />
+              </a>
+          </li>-->
+      </ul>
+  </div>
+  <script>
+      function Bucket($ct){
+          this.init($ct);
+          this.loadImg();
+      }
+      Bucket.prototype={
+          init:function($ct){
+              this.$ct=$ct;
+              this.rowList=[];   //把每个图片放进数组里，数组图片宽度的和与容器的宽度比较
+              this.clientWidth=this.$ct.width();   //容器的宽度
+          },
+          loadImg:function(){
+              var _this=this;
+              var imgs=this.getImgUrls(20);   //获取图片的url
+              //这里不能用for,因为有onload函数，表示图片加载后执行，用for的话onload里面的img表示最后一个img,要把里面的img换成this.img
+              //对每个图片的url设置img标签，并设置高为150px,宽自适应，把每张图片的宽高属性保存在对象中，执行render方法
+              $.each(imgs,function(i){
+                  var img=new Image();    //创建一个image对象，此时的img=<img>标签
+                  img.src=imgs[i];
+                  img.onload=function(){
+                      var imgInfo={
+                          target:img,
+                          width:150*(img.width/img.height),
+                          height: 150
+                      };
+                      console.log(imgs[i]);
+                      _this.render(imgInfo);
+                  }
+              });
+          },
+          //render方法把一张图片的信息放在一个数组中，然后数组的总宽度和容器的宽度比较
+          render:function(imgInfo){
+              var rowWidth=0;
+              this.rowList.push(imgInfo);
+              for(var i=0;i<this.rowList.length;i++){
+                  rowWidth+=this.rowList[i].width;
+              }
+              //若数组的总宽度大于容器宽度，需减掉总宽度和去掉最后一个图片，然后再执行layout方法
+              if(rowWidth>this.clientWidth){
+                  rowWidth-=this.rowList[i-1].width;
+                  this.rowList.pop();
+                  var rowHeight=150/rowWidth*this.clientWidth;   //设置新的高度，填充满整行，宽度会自适应
+                  this.layout(rowHeight);
+                  this.rowList=[];   //执行完后清空数组
+                  this.rowList.push(imgInfo);  //数组增加最后一个去掉的图片
+              }
+
+          },
+          //把图片加载到页面当中
+          layout:function(rowHeight){
+            var $li=$('<li class="row"></li>');
+            $.each(this.rowList,function(index,imgInfo){
+                var $a=$('<a href="#"></a>');
+                var $img=$(imgInfo.target);
+                $img.height(rowHeight);
+                $a.append($img);
+                $li.append($a);
+            });
+            this.$ct.append($li);
+            console.log($li);
+          },
+          //获取图片地址
+          getImgUrls:function(num){
+              //得到url=http://via.placeholder.com/216x207/4338b1
+              var url=[];
+              var arr=[0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'];
+              var width,height;
+              for(var i=0;i<num;i++){
+                  var color=[];
+                  width=Math.floor(Math.random()*101)+250;
+                  height=parseInt(Math.random()*51)+150;
+                  for(var j=0;j<6;j++){
+                      color.push(arr[parseInt(Math.random()*16)]);
+                  };
+                  url.push("http://via.placeholder.com/"+width+"x"+height+"/"+color.join(""));
+              }
+              console.log(url);
+              return url;
+          }
+      }
+      new Bucket($(".bucket"));
+  </script>
+</body>
+</html>
