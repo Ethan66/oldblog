@@ -98,8 +98,28 @@
           }();
         };
         TabCut1();
-        //使用原生Js
-        
+
+    </script>
+    <script>
+        //使用原生JS
+        function $$(str){
+            return document.querySelectorAll(str);
+        }
+        var tab=$$(".box .tab")[0];
+        var tabList=$$(".box .tab li");
+        var tabContent=$$(".box .content li");
+        tab.addEventListener("click",function(e){
+            tabList.forEach(function(value,index,arr){
+               value.classList.remove("active");
+            });
+            e.target.classList.add("active");
+           for(var i=0;i<tabList.length;i++){
+               if(tabList[i]===e.target){
+                   tabContent[i].classList.add("active");
+               }
+               else tabList[i].classList.remove("active");
+           }
+        },false);
     </script>
 </body>
 </html>
