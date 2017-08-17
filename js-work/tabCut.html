@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/e-style.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/e-style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <style type="text/css">
         .clearfix:after{
             display:block; content:''; clear: both;
@@ -49,12 +49,57 @@
             <li>内容3</li>
         </ul>
     </div>
-    <script src="/js/jquery-1.11.3.js"></script>
+    <div class="box e-box">
+        <ul class='tab clearfix'>
+            <li class="active">选项1</li>
+            <li>选项2</li>
+            <li>选项3</li>
+        </ul>
+        <ul class='content e-box'>
+            <li class="active">内容1</li>
+            <li>内容2</li>
+            <li>内容3</li>
+        </ul>
+    </div>
+    <script src="../js/jquery-1.11.3.js"></script>
     <script>
         //使用jQuery
-        
+        /*var $tabList=$(".box .tab"),
+        $tabContent=$(".box .content");
+        $tabList.on("click","li",function(){
+           $(this).addClass("active").siblings().removeClass("active");
+           var index=$(this).index();
+           $tabContent.find("li").eq(index).addClass("active").siblings().removeClass("active");
+        });*/
 
+        function TabCut($ct){
+            this.init($ct);
+            this.bind();
+        }
+        TabCut.prototype.init=function($ct){
+            var $ct=this.$ct=$ct;
+            this.$tabList=$ct.find(".tab");
+            this.$tabContent=$ct.find(".content");
+        };
+        TabCut.prototype.bind=function(){
+            var $tabList=this.$tabList,
+                $tabContent=this.$tabContent;
+            $tabList.on("click","li",function(){
+                $(this).addClass("active").siblings().removeClass("active");
+                var index=$(this).index();
+                $tabContent.find("li").eq(index).addClass("active").siblings().removeClass("active");
+            });
+        };
+        var TabCut1=function(){
+          return !function(){
+              $(".box").each(function(index,value){
+                  new TabCut($(value));
+              });
+          }();
+        };
+        TabCut1();
         //使用原生Js
+        
     </script>
 </body>
 </html>
