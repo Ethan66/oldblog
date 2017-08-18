@@ -72,7 +72,7 @@
            $tabContent.find("li").eq(index).addClass("active").siblings().removeClass("active");
         });*/
 
-        function TabCut($ct){
+       /* function TabCut($ct){
             this.init($ct);
             this.bind();
         }
@@ -97,29 +97,57 @@
               });
           }();
         };
-        TabCut1();
+        TabCut1();*/
 
     </script>
     <script>
         //使用原生JS
+       /* var tabList=$$(".box .tab li");
+        var tabContent=$$(".box .content li");
+        tabList.forEach(function(value){
+            console.log(value);
+            value.addEventListener("click",function(e){
+                tabList.forEach(function(value){
+                    value.classList.remove("active");
+                });
+                e.target.classList.add("active");
+                var index=[].indexOf.call(tabList,this);
+                tabContent.forEach(function(value){
+                    value.classList.remove("active");
+                });
+                tabContent[index].classList.add("active");
+            },false);
+        });*/
         function $$(str){
             return document.querySelectorAll(str);
+        };
+
+        function TabCut($ct){
+            this.init($ct);
+            this.bind();
         }
-        var tab=$$(".box .tab")[0];
-        var tabList=$$(".box .tab li");
-        var tabContent=$$(".box .content li");
-        tab.addEventListener("click",function(e){
-            tabList.forEach(function(value,index,arr){
-               value.classList.remove("active");
+        TabCut.prototype.init=function($ct){
+          this.tabList=$ct.querySelectorAll(".tab li");
+          this.tabContent=$ct.querySelectorAll(".content li");
+        };
+        TabCut.prototype.bind=function(){
+            var _this=this;
+            this.tabList.forEach(function(value){
+                value.addEventListener("click",function(e){
+                    _this.tabList.forEach(function(value){
+                        value.classList.remove("active");
+                    });
+                    e.target.classList.add("active");
+                    var index=[].indexOf.call(_this.tabList,this);
+                    _this.tabContent.forEach(function(value){
+                        value.classList.remove("active");
+                    });
+                    _this.tabContent[index].classList.add("active");
+                },false);
             });
-            e.target.classList.add("active");
-           for(var i=0;i<tabList.length;i++){
-               if(tabList[i]===e.target){
-                   tabContent[i].classList.add("active");
-               }
-               else tabList[i].classList.remove("active");
-           }
-        },false);
+        };
+        new TabCut($$(".box")[0]);
+        new TabCut($$(".box")[1]);
     </script>
 </body>
 </html>
