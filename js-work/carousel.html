@@ -67,52 +67,31 @@
            <li></li>
        </ul>
    </div>
+   <div class="carousel">
+       <ul class="img">
+           <li data-index="1">
+               <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/25.jpg" /></a>
+           </li>
+           <li data-index="2">
+               <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/24.jpg" /></a>
+           </li>
+           <li data-index="3">
+               <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/23.jpg" /></a>
+           </li>
+           <li data-index="4">
+               <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/22.jpg" /></a>
+           </li>
+       </ul>
+       <a href="#" class="arrow pre"><</a>
+       <a href="#" class="arrow next">></a>
+       <ul class="mark">
+           <li class="active"></li>
+           <li></li>
+           <li></li>
+           <li></li>
+       </ul>
+   </div>
    <script>
-
-
-       function playAuto(){
-           var clock=setInterval(function(){
-               playNext(1);
-           },2000);
-           $(".carousel").on("mouseenter",function(){
-              clearTimeout(clock);
-           });
-           $(".carousel").on("mouseleave",function(){
-               clock=setInterval(function(){
-                   playNext(1);
-               },2000);
-           });
-       }
-       function playNext(len){
-           if(isAnimate) return;
-           isAnimate=true;
-           $ulImg.animate({"left":"-="+len*imgWidth},300,function(){
-               curId+=len;
-               if(curId===imgCount){
-                   len=1; $ulImg.css({"left":-len*imgWidth});
-                   curId=0;
-               };
-               setBullet(curId);
-               isAnimate=false;
-           });
-       };
-       function playPre(len){
-           if(isAnimate) return;
-           isAnimate=true;
-           $ulImg.animate({"left":"+="+len*imgWidth},300,function(){
-               curId-=len;
-               if(curId===-1){
-                   len=4; $ulImg.css({"left":-len*imgWidth});
-                   curId=3;
-               };
-               setBullet(curId);
-           });
-       };
-       function setBullet(index){
-           $markLi.removeClass("active").eq(index).addClass("active");
-       };
-
-
 
        function Carousel1($ct){
            this.init($ct);
@@ -120,17 +99,14 @@
        };
        Carousel1.prototype.init=function($ct){
            this.$ct=$ct;
-
-       };
-       Carousel1.prototype.bind=function(){
-           var $arrPre=this.$arrPre=this.$ct.find(".arrow.pre");
-           var $arrNext=this.$arrNext=this.$ct.find(".arrow.next");
-           var $ulImg=this.$ulImg=this.$ct.find("ul.img");
-           var imgWidth=this.imgWidth=this.$ct.width();
-           var imgCount=this.imgCount=this.$ct.find("ul.img li").length;
-           var $markLi=this.$markLi=this.$ct.find(".mark li");
-           var curIde=this.curId=0;
-           var isAnimate=this.isAnimate=false;
+           var $arrPre=this.$arrPre=this.$ct.find(".arrow.pre"),
+               $arrNext=this.$arrNext=this.$ct.find(".arrow.next"),
+               $ulImg=this.$ulImg=this.$ct.find("ul.img"),
+               imgWidth=this.imgWidth=this.$ct.width(),
+               imgCount=this.imgCount=this.$ct.find("ul.img li").length,
+               $markLi=this.$markLi=this.$ct.find(".mark li"),
+               curId=this.curId=0;
+           this.isAnimate=false;
            !function addHtml(){
                var first=$ulImg.children("li").first().clone();
                var last=$ulImg.children("li").last().clone();
@@ -138,25 +114,75 @@
                $ulImg.children("li").first().before(last);
                $ulImg.css({"width":imgWidth*(imgCount+2)});
            }();
-           playAuto();
-           $arrNext.on("click",function(){
-               playNext(1);
+       };
+       Carousel1.prototype.bind=function(){
+           var _this=this;
+           _this.playAuto();
+           _this.$arrNext.on("click",function(){
+               _this.playNext(1);
            });
-           $arrPre.on("click",function(){
-               playPre(1);
+           _this.$arrPre.on("click",function(){
+               _this.playPre(1);
            });
-           $markLi.on("click",function(){
+           _this.$markLi.on("click",function(){
                var index=$(this).index();
-               if(index<curId){
-                   playPre(curId-index);
+               if(index<_this.curId){
+                   _this.playPre(_this.curId-index);
                }
-               if(index>curId){
-                   playNext(index-curId);
+               if(index>_this.curId){
+                   _this.playNext(index-_this.curId);
                }
-               setBullet(index);
+               _this.setBullet(index);
            });
-       }
-       new Carousel1($(".carousel"));
+       };
+       Carousel1.prototype.playAuto=function(){
+           var _this=this;
+           var clock=setInterval(function(){
+               this.playNext(1);
+           }.bind(_this),2000);
+           _this.$ct.on("mouseenter",function(){
+               clearTimeout(clock);
+           });
+           _this.$ct.on("mouseleave",function(){
+               clock=setInterval(function(){
+                   _this.playNext(1);
+               }.bind(_this),2000);
+           });
+       };
+       Carousel1.prototype.playNext=function(len){
+           var _this=this;
+           if(_this.isAnimate) return;
+           _this.isAnimate=true;
+           _this.$ulImg.animate({"left":"-="+len*_this.imgWidth},300,function(){
+               _this.curId+=len;
+               if(_this.curId===_this.imgCount){
+                   len=1; _this.$ulImg.css({"left":-len*_this.imgWidth});
+                   _this.curId=0;
+               };
+               _this.setBullet(_this.curId);
+               _this.isAnimate=false;
+           });
+       };
+       Carousel1.prototype.playPre=function(len){
+           var _this=this;
+           if(_this.isAnimate) return;
+           _this.isAnimate=true;
+           _this.$ulImg.animate({"left":"+="+len*_this.imgWidth},300,function(){
+               _this.curId-=len;
+               if(_this.curId===-1){
+                   len=4; _this.$ulImg.css({"left":-len*_this.imgWidth});
+                   _this.curId=3;
+               };
+               _this.setBullet(_this.curId);
+               _this.isAnimate=false;
+           });
+       };
+       Carousel1.prototype.setBullet=function(index){
+           var _this=this;
+           _this.$markLi.removeClass("active").eq(index).addClass("active");
+       };
+       new Carousel1($(".carousel").eq(0));
+       new Carousel1($(".carousel").eq(1));
    </script>
 
 </body>
