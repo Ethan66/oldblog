@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/e-style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <style type="text/css">
+        .clearfix:after{
+            display:block; content:''; clear: both;
+        }
+        .box{
+            max-width: 600px; border: 1px solid #ddd; border-radius: 4px; padding: 10px; margin: 20px auto 0;
+        }
+        .box .tab{
+            border-bottom: 1px solid #ddd; height: 39px;
+        }
+        .box .tab li{
+            padding: 12px 20px; font-size: 14px; float: left;
+        }
+        .box .tab li:hover{
+            color: red; cursor: pointer;
+        }
+        .box .tab li.active{
+            border: 1px solid #ddd; border-bottom-color: #fff; border-radius: 4px; color: red;
+        }
+        .box .content{
+            padding-top: 20px;
+        }
+        .box .content li{
+            min-height: 60px; display: none; font-size: 14px;
+        }
+        .box .content li.active{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="box e-box">
+        <ul class='tab clearfix'>
+            <li class="active">选项1</li>
+            <li>选项2</li>
+            <li>选项3</li>
+        </ul>
+        <ul class='content e-box'>
+            <li class="active">内容1</li>
+            <li>内容2</li>
+            <li>内容3</li>
+        </ul>
+    </div>
+    <div class="box e-box">
+        <ul class='tab clearfix'>
+            <li class="active">选项1</li>
+            <li>选项2</li>
+            <li>选项3</li>
+        </ul>
+        <ul class='content e-box'>
+            <li class="active">内容1</li>
+            <li>内容2</li>
+            <li>内容3</li>
+        </ul>
+    </div>
+    <script src="../js/jquery-1.11.3.js"></script>
+    <script>
+        //使用jQuery
+        /*var $tabList=$(".box .tab"),
+        $tabContent=$(".box .content");
+        $tabList.on("click","li",function(){
+           $(this).addClass("active").siblings().removeClass("active");
+           var index=$(this).index();
+           $tabContent.find("li").eq(index).addClass("active").siblings().removeClass("active");
+        });*/
+
+       /* function TabCut($ct){
+            this.init($ct);
+            this.bind();
+        }
+        TabCut.prototype.init=function($ct){
+            var $ct=this.$ct=$ct;
+            this.$tabList=$ct.find(".tab");
+            this.$tabContent=$ct.find(".content");
+        };
+        TabCut.prototype.bind=function(){
+            var $tabList=this.$tabList,
+                $tabContent=this.$tabContent;
+            $tabList.on("click","li",function(){
+                $(this).addClass("active").siblings().removeClass("active");
+                var index=$(this).index();
+                $tabContent.find("li").eq(index).addClass("active").siblings().removeClass("active");
+            });
+        };
+        var TabCut1=function(){
+          return !function(){
+              $(".box").each(function(index,value){
+                  new TabCut($(value));
+              });
+          }();
+        };
+        TabCut1();*/
+
+    </script>
+    <script>
+        //使用原生JS
+       /* var tabList=$$(".box .tab li");
+        var tabContent=$$(".box .content li");
+        tabList.forEach(function(value){
+            console.log(value);
+            value.addEventListener("click",function(e){
+                tabList.forEach(function(value){
+                    value.classList.remove("active");
+                });
+                e.target.classList.add("active");
+                var index=[].indexOf.call(tabList,this);
+                tabContent.forEach(function(value){
+                    value.classList.remove("active");
+                });
+                tabContent[index].classList.add("active");
+            },false);
+        });*/
+        function $$(str){
+            return document.querySelectorAll(str);
+        };
+
+        function TabCut($ct){
+            this.init($ct);
+            this.bind();
+        }
+        TabCut.prototype.init=function($ct){
+          this.tabList=$ct.querySelectorAll(".tab li");
+          this.tabContent=$ct.querySelectorAll(".content li");
+        };
+        TabCut.prototype.bind=function(){
+            var _this=this;
+            this.tabList.forEach(function(value){
+                value.addEventListener("click",function(e){
+                    _this.tabList.forEach(function(value){
+                        value.classList.remove("active");
+                    });
+                    e.target.classList.add("active");
+                    var index=[].indexOf.call(_this.tabList,this);
+                    _this.tabContent.forEach(function(value){
+                        value.classList.remove("active");
+                    });
+                    _this.tabContent[index].classList.add("active");
+                },false);
+            });
+        };
+        new TabCut($$(".box")[0]);
+        new TabCut($$(".box")[1]);
+    </script>
+</body>
+</html>
