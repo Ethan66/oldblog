@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对话框</title>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/e-style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/jquery-1.11.3.js"></script>
+    <style type="text/css">
+        .dialog .dialog-overlay {
+            width:100%;
+            height:100%;
+            opacity: 0.5;
+            background:#000;
+
+            position:absolute;
+            top:0; left:0;
+            z-index:3000;
+        }
+
+
+        .dialog .dialog-box {
+            position:absolute;
+            z-index:5000;
+            left: 50%;
+            top: 30%;
+            margin-left: -164px;
+            font-size: 14px;
+            padding-bottom: 10px;
+            border-radius: 5px;
+            background:#eee;
+            width:328px;
+        }
+        .dialog .dialog-header {
+            padding: 10px 19px;
+            color: #fff;
+            background: #676666;
+        }
+        .dialog .dialog-header h3{
+            margin: 0;
+            font-size: 14px;
+        }
+        .dialog .dialog-header .btn-close{
+            position: absolute;
+            right: 10px;
+            top: 8px;
+            font-family: fantasy;
+            cursor: pointer;
+        }
+        .dialog .dialog-content {
+            padding:10px;
+            margin:13px;
+            color:#666;
+            font-size:11px;
+        }
+        .dialog .dialog-footer{
+            text-align: center;
+        }
+        a.btn {
+            position: relative;
+            text-align: center;
+            background-color: #e33100;
+            display: inline-block;
+            width: 50px;
+            padding: 5px 0 6px;
+            margin: 2px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        a.btn:hover {
+            background-color: #c33100;
+        }
+    </style>
+</head>
+<body>
+    <button id="open1"> 打开1</button>
+    <button id="open2"> 打开2</button>
+    <button id="open3"> 打开3</button>
+    <button id="open4"> 打开4</button>
+    <button id="open5"> 打开5</button>
+    <button id="close">关闭</button>
+   <script>
+       function Dialog(){
+           this.bind();
+       };
+       Dialog.prototype.bind=function(){
+           this.createDialog();
+       };
+       Dialog.prototype.open=function(){
+           this.showDialog();
+       }
+       Dialog.prototype.showDialog=function(){
+
+           this.$dialog.show();
+       };
+       Dialog.prototype.hideDialog=function(){
+           this.$dialog.hide();
+       }
+       Dialog.prototype.createDialog=function(){
+           var html= '<div class="dialog" style="display:none">'
+           + '<div class="dialog-overlay"></div>'
+           + '<div class="dialog-box">'
+           +   '<div class="dialog-header"><h3></h3><span class="btn-close">x</span></div>'
+           +   '<div class="dialog-content">'
+           + '</div>'
+           + '<div class="dialog-footer">'
+           + '  <a href="#" class="btn btn-close">取消</a>'
+           + '  <a href="#" class="btn btn-confirm">确定</a>'
+           + '</div>'
+           + '</div>'
+           +'</div>';
+           this.$dialog=$(html);
+           $("body").append(this.$dialog);
+           this.$dialog.show();
+
+
+       };
+       var Dialog1=new Dialog();
+       $("#open1").on("click",function(){
+           Dialog1.open();
+       });
+   </script>
+
+</body>
+</html>
