@@ -86,8 +86,16 @@
        function Dialog(){
            this.bind();
        };
+       //首先绑定事件
        Dialog.prototype.bind=function(){
-           this.createDialog();
+           var _this=this;
+           _this.createDialog();  //生成对话框
+           _this.$dialog.find(".btn-close").on("click",function(){
+               _this.$dialog.hide();  //点击X隐藏对话框
+           });
+           _this.$dialog.find(".btn-confirm").on("click",function(){
+               _this.$dialog.hide();  //点击X隐藏对话框
+           });
        };
        Dialog.prototype.open=function(){
            this.showDialog();
@@ -114,9 +122,6 @@
            +'</div>';
            this.$dialog=$(html);
            $("body").append(this.$dialog);
-           this.$dialog.show();
-
-
        };
        var Dialog1=new Dialog();
        $("#open1").on("click",function(){
