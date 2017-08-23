@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="../css/style.css" />
     <script src="../js/jquery-1.11.3.js"></script>
     <style type="text/css">
+        .btn_dia{
+            padding: 5px 10px; outline: 0; border-radius: 3px; border: 1px solid #bbb; cursor: pointer; background: none;
+        }
+        .btn_dia:hover{
+            background-color: #666; color: #fff;
+        }
         .dialog .dialog-overlay {
             width:100%;
             height:100%;
@@ -33,9 +39,11 @@
             width:328px;
         }
         .dialog .dialog-header {
-            padding: 10px 19px;
+            padding: 16px 20px;
             color: #fff;
             background: #676666;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
         }
         .dialog .dialog-header h3{
             margin: 0;
@@ -76,13 +84,12 @@
     </style>
 </head>
 <body>
-    <button id="open1"> 打开1</button>
-    <button id="open2"> 打开2</button>
-    <button id="open3"> 打开3</button>
-    <button id="open4"> 打开4</button>
-    <button id="open5"> 打开5</button>
-    <button id="close">关闭</button>
-   <script>
+    <button class="btn_dia" id="open1"> 打开1</button>
+    <button class="btn_dia" id="open2"> 打开2</button>
+    <button class="btn_dia" id="open3"> 打开3</button>
+    <button class="btn_dia" id="open4"> 打开4</button>
+    <button class="btn_dia" id="open5"> 打开5</button>
+   <!--<script>
        //思路：1、首先用jq生成对话框，并对对话框里的取消和确认绑定事件
             //2、对页面的按钮进行绑定事件，当触发事件时，显示对话框
        //升级：3、当点击按钮时触发事件时，将要展示的内容，标题作为字符串参数传给对话框
@@ -95,14 +102,18 @@
            var _this=this;
            _this.createDialog();  //生成对话框
            _this.$dialog.find(".btn-close").on("click",function(){  //点击X隐藏对话框
+               _this.opts.onClose();
                _this.$dialog.hide();
            });
            _this.$dialog.find(".btn-confirm").on("click",function(){  //点击确认对话框
+               _this.opts.onConfirm();
                _this.$dialog.hide();
            });
        };
        //显示对话框
-       Dialog.prototype.open=function(){
+       Dialog.prototype.open=function(opts){
+           this.setOpts(opts);   //对参数进行设置
+           this.setDialog();     //根据参数进行显示
            this.showDialog();
        }
        //显示对话框
@@ -131,12 +142,234 @@
            this.$dialog=$(html);
            $("body").append(this.$dialog);
        };
-       Dialog.prototype.
+       //设置初始参数值，当new对象的时候没有参数传进来可以进行默认设置
+       Dialog.prototype.defaultOpts={
+           title: "",
+           content: "",
+           isShowCloseBtn: true,
+           isShowConfirmBtn: false,
+           onClose: function(){},
+           onConfirm: function(){}
+       };
+       //对传进的参数进行操作
+       Dialog.prototype.setOpts=function(opts){
+           if(typeof opts ==="string") {
+               this.opts=$.extend({},this.defaultOpts,{content:opts});
+           }
+           if(typeof opts==="object"){
+               this.opts=$.extend({},this.defaultOpts,opts);
+           }
+       }
+       Dialog.prototype.setDialog=function(){
+           var opt=this.opts,$dialog=this.$dialog;
+           if(!opt.title){
+               $dialog.find(".dialog-header").hide();
+           }
+           else {
+               $dialog.find(".dialog-header").show();
+               $dialog.find(".dialog-header .h3").text(opt.title);
+           }
+           if(opt.content){
+               $dialog.find(".dialog-content").html(opt.content);
+           }
+           if(!opt.isShowCloseBtn){
+               $dialog.find(".dialog-footer .btn-close").hide();
+           }
+           else {
+               $dialog.find(".dialog-footer .btn-close").show();
+           }
+           if(!opt.isShowConfirmBtn){
+               $dialog.find(".btn-confirm").hide();
+           }
+           else {
+               $dialog.find(".btn-confirm").show();
+           }
+       };
        var Dialog1=new Dialog();   //这语句已经执行了Dialog()函数，所以执行bind()，所以已经生成了对话框和监听事件
        $("#open1").on("click",function(){
            Dialog1.open('hello, 欢迎光临');
        });
-   </script>
+       $('#open2').on('click',function(){
+           Dialog1.open('<a href="http://www.baidu.com" target="_blank">百度</a>');
+       });
+       $('#open3').on('click',function(){
+           Dialog1.open({
+               title: '欢迎来到饥人谷',
+               content: 'hello',
+               isShowCloseBtn: true,
+               isShowConfirmBtn: true,
+               onClose: function(){
+                   alert('关闭')
+               },
+               onConfirm: function(){
+                   alert('确定');
+               }
+           });
+       });
+       var tpl = '<ul><li>列表1</li><li>列表2</li><li>列表1</li><li>列表1</li></ul>';
+       $('#open4').on('click',function(){
+           Dialog1.open({
+               title: '欢迎来到饥人谷',
+               content: tpl,
+               isShowCloseBtn: true,
+               isShowConfirmBtn: true,
+               onClose: function(){
+                   alert('关闭')
+               },
+               onConfirm: function(){
+                   alert('确定');
+               }
+           });
+       });
+       $('#open5').on('click',function(){
+           Dialog1.open({
+               title: '欢迎光临',
+               content: 'hello',
+               isShowCloseBtn: false,
+               isShowConfirmBtn: false
+           });
+       });
+   </script>-->
+    <script>
+        var Dialog2=(function(){
+            function Dialog(){
+                this.bind();
+            };
+            //首先绑定事件
+            Dialog.prototype.bind=function(){
+                var _this=this;
+                _this.createDialog();  //生成对话框
+                _this.$dialog.find(".btn-close").on("click",function(){  //点击X隐藏对话框
+                    _this.opts.onClose();
+                    _this.$dialog.hide();
+                });
+                _this.$dialog.find(".btn-confirm").on("click",function(){  //点击确认对话框
+                    _this.opts.onConfirm();
+                    _this.$dialog.hide();
+                });
+            };
+            //显示对话框
+            Dialog.prototype.open=function(opts){
+                this.setOpts(opts);   //对参数进行设置
+                this.setDialog();     //根据参数进行显示
+                this.showDialog();
+            }
+            //显示对话框
+            Dialog.prototype.showDialog=function(){
+
+                this.$dialog.show();
+            };
+            //隐藏对话框
+            Dialog.prototype.hideDialog=function(){
+                this.$dialog.hide();
+            }
+            //生成对话框
+            Dialog.prototype.createDialog=function(){
+                var html= '<div class="dialog" style="display:none">'
+                    + '<div class="dialog-overlay"></div>'
+                    + '<div class="dialog-box">'
+                    +   '<div class="dialog-header"><h3></h3><span class="btn-close">x</span></div>'
+                    +   '<div class="dialog-content">'
+                    + '</div>'
+                    + '<div class="dialog-footer">'
+                    + '  <a href="#" class="btn btn-close">取消</a>'
+                    + '  <a href="#" class="btn btn-confirm">确定</a>'
+                    + '</div>'
+                    + '</div>'
+                    +'</div>';
+                this.$dialog=$(html);
+                $("body").append(this.$dialog);
+            };
+            //设置初始参数值，当new对象的时候没有参数传进来可以进行默认设置
+            Dialog.prototype.defaultOpts={
+                title: "",
+                content: "",
+                isShowCloseBtn: true,
+                isShowConfirmBtn: false,
+                onClose: function(){},
+                onConfirm: function(){}
+            };
+            //对传进的参数进行操作
+            Dialog.prototype.setOpts=function(opts){
+                if(typeof opts ==="string") {
+                    this.opts=$.extend({},this.defaultOpts,{content:opts});
+                }
+                if(typeof opts==="object"){
+                    this.opts=$.extend({},this.defaultOpts,opts);
+                }
+            }
+            Dialog.prototype.setDialog=function(){
+                var opt=this.opts,$dialog=this.$dialog;
+                if(!opt.title){
+                    $dialog.find(".dialog-header").hide();
+                }
+                else {
+                    $dialog.find(".dialog-header").show();
+                    $dialog.find(".dialog-header .h3").text(opt.title);
+                }
+                if(opt.content){
+                    $dialog.find(".dialog-content").html(opt.content);
+                }
+                if(!opt.isShowCloseBtn){
+                    $dialog.find(".dialog-footer .btn-close").hide();
+                }
+                else {
+                    $dialog.find(".dialog-footer .btn-close").show();
+                }
+                if(!opt.isShowConfirmBtn){
+                    $dialog.find(".btn-confirm").hide();
+                }
+                else {
+                    $dialog.find(".btn-confirm").show();
+                }
+            };
+            return new Dialog();
+        })();
+
+        $("#open1").on("click",function(){
+            Dialog2.open('hello, 欢迎光临');
+        });
+        $('#open2').on('click',function(){
+            Dialog2.open('<a href="http://www.baidu.com" target="_blank">百度</a>');
+        });
+        $('#open3').on('click',function(){
+            Dialog2.open({
+                title: '欢迎来到饥人谷',
+                content: 'hello',
+                isShowCloseBtn: true,
+                isShowConfirmBtn: true,
+                onClose: function(){
+                    alert('关闭')
+                },
+                onConfirm: function(){
+                    alert('确定');
+                }
+            });
+        });
+        var tpl = '<ul><li>列表1</li><li>列表2</li><li>列表1</li><li>列表1</li></ul>';
+        $('#open4').on('click',function(){
+            Dialog2.open({
+                title: '欢迎来到饥人谷',
+                content: tpl,
+                isShowCloseBtn: true,
+                isShowConfirmBtn: true,
+                onClose: function(){
+                    alert('关闭')
+                },
+                onConfirm: function(){
+                    alert('确定');
+                }
+            });
+        });
+        $('#open5').on('click',function(){
+            Dialog2.open({
+                title: '欢迎光临',
+                content: 'hello',
+                isShowCloseBtn: false,
+                isShowConfirmBtn: false
+            });
+        });
+    </script>
 
 </body>
 </html>
