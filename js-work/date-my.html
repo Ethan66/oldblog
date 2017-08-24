@@ -157,14 +157,14 @@
         </tbody>
     </div> -->
 
-    <script>
+   <!-- <script>
         //思路：1、先获取设置在属性里的日期，定为当前时间和当前展示的时间，当前展示时间是随着展示月份不同变动的
         //2、创建日期表格的表头
         //3、创建日期表格的日期，先设置一个空数组，第一天和最后一天的星期，将第一天和最后一天前后的空格设置为{style:"",date:""}传入数组，
         //4、再将第一天到最后一天传入数组，格式为{style:"cur-month",date:1,fulldate:"2017-08-24"}
         //5、再通过提取数组中的数字存入字符串中，传入DOM中，记得用html()传入，当点击下一月就可以直接替换
         //6、展示成功后就对表格设置事件
-        DateCreater=function($ct){
+        var DateCreater=function($ct){
             this.$ct=$ct;
             this.init();
             this.bind();
@@ -241,7 +241,7 @@
                 var i=0;
             }
             else {var i=firstDay;}
-            for(;i>0;i--){               //针对第一天的前面几天设置空白
+            for(;i>0;i&#45;&#45;){               //针对第一天的前面几天设置空白
                 arr.push({style:"",date:""});
             }
             for(var i=1;i<monthDays+1;i++){   //针对要展示的月份的date设置
@@ -318,9 +318,9 @@
         DateCreater.prototype.getPreDate=function(date){
             var year=date.getFullYear();
             var month=date.getMonth();
-            month--;
+            month&#45;&#45;;
             if(month<0){
-                month=11; year--;
+                month=11; year&#45;&#45;;
             }
             var date1=new Date(year,month,1);
             return date1;
@@ -329,6 +329,179 @@
         $("body .date-ipt").each(function(index,value){
             new DateCreater($(value));
         })
+    </script>-->
+    <script>
+        var Datecreater1=(function(){
+            var DateCreater=function($ct){
+                this.$ct=$ct;
+                this.init();
+                this.bind();
+            };
+            DateCreater.prototype.init=function(){
+                var d=this.$ct.attr("date-init");
+                if(d){
+                    this.date=new Date(d);   //记录当前的时间
+                    this.showDate=new Date(d);   //记录当前展示的时间
+                }
+                else {
+                    this.date=new Date();
+                    this.showDate=new Date();
+                }
+            };
+            DateCreater.prototype.bind=function(){
+                var _self=this;
+                this.createForm();     //生成表格
+                this.setDate();        //设定表格里面的日期
+                this.$ct.on("click",function(e){     //点击显示表格
+                    e.stopPropagation();
+                    $("body").find(".ui-date-picker").hide();
+                    _self.showForm();
+                });
+                this.$form.on("click",function(e){     //点击表格阻止冒泡，防止触发window事件
+                    e.stopPropagation();
+                });
+                $(window).on("click",function(){     //点击其他地方隐藏表格
+                    _self.hideForm();
+                });
+                this.$form.on("click",".next",function(){
+                    _self.showDate=_self.getNextDate(_self.showDate);    //点击next修改this.showDate,后重新运行this.setDate
+                    _self.setDate();
+                });
+                this.$form.on("click",".pre",function(){
+                    _self.showDate=_self.getPreDate(_self.showDate);    //点击pre修改this.showDate,后重新运行this.setDate
+                    _self.setDate();
+                });
+                this.$form.on("click",".cur-month",function(){
+                    _self.$ct.val($(this).attr("data-date"));    //点击pre修改this.showDate,后重新运行this.setDate
+                    _self.hideForm();
+                });
+            }
+            DateCreater.prototype.createForm=function(){
+                var html='<div class="ui-date-picker" style="display:none">'
+                    +    '<div class="header"><span class="pre caret-left"></span><span class="cur header-date"></span><span class="next caret-right"></span></div>'
+                    +    '<table class="panel">'
+                    +      '<thead> <tr> <th>日</th> <th>一</th> <th>二</th> <th>三</th> <th>四</th> <th>五</th> <th>六</th> </tr> </thead>'
+                    +      '<tbody></tbody>'
+                    +   '</div>';
+                this.$form=$(html);
+                this.$ct.after(this.$form);
+                this.$form.css({
+                    'position': 'absolute',
+                    'left': this.$ct.offset().left,
+                    'top': this.$ct.offset().top + this.$ct.height(true)
+                });
+            }
+            DateCreater.prototype.showForm=function(){
+                this.$form.show();
+            };
+            DateCreater.prototype.hideForm=function(){
+                this.$form.hide();
+            };
+            DateCreater.prototype.setDate=function(){
+                var firstDay=this.getFirstDay(this.showDate).getDay();   //获取要展示的月份的第一天
+                var lastDay=this.getLastDay(this.showDate).getDay();     //获取要展示的月份的最后一天
+                var monthDays=this.getLastDay(this.showDate).getDate();  //获取要展示的月份的总天数
+                var year1=this.showDate.getFullYear();
+                var month1=this.showDate.getMonth();
+                var arr=[];
+                var html1="";
+                if(firstDay===7){
+                    var i=0;
+                }
+                else {var i=firstDay;}
+                for(;i>0;i--){               //针对第一天的前面几天设置空白
+                    arr.push({style:"",date:""});
+                }
+                for(var i=1;i<monthDays+1;i++){   //针对要展示的月份的date设置
+                    arr.push({style:"cur-month",date:i,fulldate:this.getYYMMDD(new Date(year1,month1,i))});
+                }
+                if(lastDay===7){
+                    var j=0;
+                }
+                else {var j=lastDay;}
+                for(j;j<6;j++){     //针对最后一天的后面几天设置空白
+                    arr.push({style:"",date:""});
+                }
+                for(var k=0;k<arr.length;k++){    //将数组转化为DOM字符串
+                    if(k%7===0){
+                        html1+="<tr>";
+                    }
+                    if(arr[k].style){
+                        html1+='<td class="'+arr[k].style;
+
+                        if(this.getYYMMDD(this.date)===this.getYYMMDD(this.showDate)){    //判断展示时间和当前时间是否一致
+                            if(this.date.getDate()===arr[k].date){
+                                html1+=' cur-date';
+                            }
+                        }
+                        html1+='" data-date="'+arr[k].fulldate+'">';
+                    }
+                    else html1+='<td>';
+                    html1+=arr[k].date+"</td>";
+                    if(k%7===6){
+                        html1+="</tr>";
+                    }
+                }
+                this.$form.find("tbody").html(html1);     //将字符串添加到页面中
+                this.$form.find(".header-date").text(this.getYYMM(this.showDate));   //找到表格中的头部插入当前年月
+            };
+            DateCreater.prototype.getFirstDay=function(date){
+                var year=date.getFullYear();
+                var month=date.getMonth();
+                var date1=new Date(year,month,1);
+                return date1;
+            };
+            DateCreater.prototype.getLastDay=function(date){
+                var year=date.getFullYear();
+                var month=date.getMonth();
+                month++;
+                if(month>11){
+                    year++;month=0;
+                }
+                var date1=new Date(year,month,1);
+                var date2=new Date(Date.parse(date1)-24*60*60*1000);
+                return date2;
+            };
+            DateCreater.prototype.getYYMMDD=function(date){
+                var year=date.getFullYear();
+                var month=date.getMonth();
+                var date1=date.getDate();
+                return year+"-"+(month+1)+'-'+date1;
+            };
+            DateCreater.prototype.getYYMM=function(date){
+                var year=date.getFullYear();
+                var month=date.getMonth()+1;
+                return year+'年'+month+'月';
+            };
+            DateCreater.prototype.getNextDate=function(date){
+                var year=date.getFullYear();
+                var month=date.getMonth();
+                month++;
+                if(month>11){
+                    month=0; year++;
+                }
+                var date1=new Date(year,month,1);
+                return date1;
+            };
+            DateCreater.prototype.getPreDate=function(date){
+                var year=date.getFullYear();
+                var month=date.getMonth();
+                month--;
+                if(month<0){
+                    month=11; year--;
+                }
+                var date1=new Date(year,month,1);
+                return date1;
+            };
+            return {
+                init:function($ct){
+                    $ct.each(function(index, value){
+                       new DateCreater($(value));
+                    });
+                }
+            }
+        })();
+        Datecreater1.init($(".date-ipt"));
     </script>
 
 </body>
