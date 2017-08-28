@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CommonJS</title>
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/e-style.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <script src="../../js/jquery-1.11.3.js"></script>
+
+</head>
+<body>
+  <script>
+      var nameModule = require('./a.js');       //相当于nameModule调用了JS的require函数，该方法读取一个文件并执行，返回内部的module.exports对象。
+      nameModule.printName();
+  </script>
+</body>
+</html>
