@@ -72,35 +72,37 @@
            $tabContent.find("li").eq(index).addClass("active").siblings().removeClass("active");
         });*/
 
-       /* function TabCut($ct){
-            this.init($ct);
-            this.bind();
-        }
-        TabCut.prototype.init=function($ct){
-            var $ct=this.$ct=$ct;
-            this.$tabList=$ct.find(".tab");
-            this.$tabContent=$ct.find(".content");
-        };
-        TabCut.prototype.bind=function(){
-            var $tabList=this.$tabList,
-                $tabContent=this.$tabContent;
-            $tabList.on("click","li",function(){
-                $(this).addClass("active").siblings().removeClass("active");
-                var index=$(this).index();
-                $tabContent.find("li").eq(index).addClass("active").siblings().removeClass("active");
-            });
-        };
-        var TabCut1=function(){
-          return !function(){
-              $(".box").each(function(index,value){
-                  new TabCut($(value));
-              });
-          }();
-        };
-        TabCut1();*/
+        var TabCut1=(function() {
+            function TabCut($ct){
+                this.init($ct);
+                this.bind();
+            }
+            TabCut.prototype.init=function($ct){
+                var $ct=this.$ct=$ct;
+                this.$tabList=$ct.find(".tab");
+                this.$tabContent=$ct.find(".content");
+            };
+            TabCut.prototype.bind=function(){
+                var $tabList=this.$tabList,
+                    $tabContent=this.$tabContent;
+                $tabList.on("click","li",function(){
+                    $(this).addClass("active").siblings().removeClass("active");
+                    var index=$(this).index();
+                    $tabContent.find("li").eq(index).addClass("active").siblings().removeClass("active");
+                });
+            };
+            return {
+                init:function($ct){
+                    $ct.each(function (index, value) {
+                        new TabCut($(value));
+                    });
+                }
+            }
+        })();
+        TabCut1.init($(".box"));
 
     </script>
-    <script>
+    <!--<script>
         //使用原生JS
        /* var tabList=$$(".box .tab li");
         var tabContent=$$(".box .content li");
@@ -148,6 +150,6 @@
         };
         new TabCut($$(".box")[0]);
         new TabCut($$(".box")[1]);
-    </script>
+    </script>-->
 </body>
 </html>

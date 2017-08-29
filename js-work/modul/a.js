@@ -1,4 +1,4 @@
-/*//CommonJS
+//CommonJS
 var name="Ethan";
 function printName(){
     console.log(name);
@@ -9,10 +9,10 @@ function printFullName(firstName){
 module.exports = {                //module.exports对象是作为模块出口,方便其他的js调用
     printName: printName,
     printFullName: printFullName
-}*/
+}
 
 
-//AMD规范
+/*//AMD规范
 define("a.js",['dependency'], function(){
     var name = 'Byron';
     function printName(){
@@ -22,4 +22,4 @@ define("a.js",['dependency'], function(){
     return {
         printName: printName
     };
-});
+});*/

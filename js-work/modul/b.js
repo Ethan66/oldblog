@@ -1,11 +1,11 @@
-/*//CommonJS
+//CommonJS
 var nameModule = require('./a.js');       //相当于nameModule调用了JS的require函数，该方法读取一个文件并执行，返回内部的module.exports对象。
-nameModule.printName();*/
+nameModule.printName();
 
 
-//AMD
+/*//AMD
 require(['dependency'], function (my){
-    my.printName(); });
+    my.printName(); });*/
 
 
 
