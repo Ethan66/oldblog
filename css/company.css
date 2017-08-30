@@ -47,13 +47,14 @@ body{
     text-decoration: none;
 }
 #banner{
-    height: 757px; overflow: hidden;
+    width: 100%; height: 757px; overflow: hidden; position: relative;
 }
 #banner ul{
-    height: 100%;
+     height: 100%; position: absolute;
 }
 #banner li{
     width: 100%; height: 100%; background-size: cover; background-position: center center; color: #fff; overflow: auto;
+    position: absolute;
 }
 #banner li .text{
     width: 1000px; margin: 300px auto 0; text-align: center;
@@ -70,6 +71,23 @@ body{
     padding: 20px 40px; color: #fff; font-size: 1.2em; text-transform: uppercase; font-weight: bold; border-radius: 3px;
 }
 #banner li .text a:hover{
+    text-decoration: none;
+}
+#banner>.text{
+    width: 1000px; margin: 300px 0 0 -500px; text-align: center; color: #fff; position: absolute; left: 50%; z-index: 100;
+}
+#banner>.text p{
+    font-size: 3em; font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif; font-style: italic;
+    margin-bottom: 20px;
+}
+#banner>.text h2{
+    font-size: 4.5em; font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight: bold;
+    margin-bottom: 80px;
+}
+#banner>.text a{
+    padding: 20px 40px; color: #fff; font-size: 1.2em; text-transform: uppercase; font-weight: bold; border-radius: 3px;
+}
+#banner>.text a:hover{
     text-decoration: none;
 }
 #content .w-style{
