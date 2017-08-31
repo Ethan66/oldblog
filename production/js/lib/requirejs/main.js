@@ -5,7 +5,8 @@ requirejs.config({
         app:"../app"
     }
 });
-requirejs(["jquery","carousel","app/index","waterfall","goTop"],function($,Carousel,index,Waterfall,goTop){
+requirejs(["jquery","carousel","app/index","waterfall","goTop"],function($,Carousel,index,Waterfall,GoTop){
     Carousel.init($("#banner"));
     Waterfall.init($(".waterfall"));
+    GoTop.init($("#content"));
 });

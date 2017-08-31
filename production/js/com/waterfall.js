@@ -78,6 +78,7 @@ define(["jquery"],function(){
              _this.imgPlace($node);
           });
         });
+        _this.isArrive=true;
       });
     }
     Waterfall.prototype.getData=function(callback){
