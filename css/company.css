@@ -49,28 +49,28 @@ body{
 #banner{
     width: 100%; height: 757px; overflow: hidden; position: relative;
 }
-#banner ul{
+#banner .img{
      height: 100%; position: absolute;
 }
-#banner li{
+#banner .img li{
     width: 100%; height: 100%; background-size: cover; background-position: center center; color: #fff; overflow: auto;
     float: left;
 }
-#banner li .text{
+#banner .img .text{
     width: 1000px; margin: 300px auto 0; text-align: center;
 }
-#banner li .text p{
+#banner .img .text p{
     font-size: 3em; font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif; font-style: italic;
     margin-bottom: 20px;
 }
-#banner li .text h2{
+#banner .img .text h2{
     font-size: 4.5em; font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight: bold;
     margin-bottom: 80px;
 }
-#banner li .text a{
+#banner .img .text a{
     padding: 20px 40px; color: #fff; font-size: 1.2em; text-transform: uppercase; font-weight: bold; border-radius: 3px;
 }
-#banner li .text a:hover{
+#banner .img .text a:hover{
     text-decoration: none;
 }
 #banner>.text{
@@ -89,6 +89,26 @@ body{
 }
 #banner>.text a:hover{
     text-decoration: none;
+}
+#banner .arrow{
+    display: block; width: 30px; height: 30px; line-height: 30px; border-radius: 50%; background-color: rgba(255,255,255,.5);
+    position: absolute; z-index: 2; top: 50%; left: 15px; margin-top: -15px; text-align: center; font-size: 16px;
+}
+#banner .arrow:hover{
+    text-decoration: none;
+}
+#banner .arrow.next{
+    left: auto; right: 15px;
+}
+#banner .mark{
+    width: 100%; text-align: center; position: absolute; z-index: 2; bottom: 30px; margin-left: -6px;
+}
+#banner .mark li{
+    display: inline-block; width: 24px; height: 6px; background-color: rgba(255,255,255,.5); margin-right: 6px;
+    border-radius: 3px; cursor: pointer;
+}
+#banner .mark li.active{
+    background-color: green;
 }
 #content .w-style{
     padding: 150px 0; max-width: 1150px; margin-left: auto; margin-right: auto; overflow: hidden;
@@ -247,6 +267,16 @@ body{
 #content .contact form .line input[type=submit]{
     width: 200px; height: 70px; line-height: 70px; margin-top: 30px; text-indent: 0; text-transform: uppercase; color: #fff;
     font-weight: bold;
+}
+.backtop a.none{
+    display:none;
+}
+.backtop a{
+    display: inline-block; position: fixed; right: 100px; bottom: 100px; padding: 10px 16px; border-radius: 3px; color: #fff;
+    box-shadow: 0 1px 3px 1px rgba(162,102,12,.6); cursor: pointer;
+}
+.backtop a:hover{
+    text-decoration: none;
 }
 #footer{
     padding: 30px 0; text-align: center;
