@@ -1,10 +1,12 @@
-$(window).on("resize",function(){
+define(["jquery"],function(){
+  $(window).on("resize",function(){
+    setbanner();
+  });
+  var setbanner= function(){
+    var windowWidth=$(window).width();
+    var $bannerLi=$("body").find("#banner .img li");
+    $bannerLi.css("width",windowWidth);
+    $("#banner .img").css("width",windowWidth*$bannerLi.length);
+  }
   setbanner();
 });
-var setbanner= function(){
-  var windowWidth=$(window).width();
-  var $bannerLi=$("body").find("#banner li");
-  $bannerLi.css("width",windowWidth);
-  $("#banner ul").css("width",windowWidth*$bannerLi.length);
-}
-setbanner();

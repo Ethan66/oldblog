@@ -1,0 +1,22 @@
+.clearfix:after{
+    display: block; content: ""; clear: both;
+}
+.waterfall{
+    text-align: center;
+}
+.waterfall .img{
+    display: inline-block;
+}
+.waterfall li{
+    padding-right: 13px; float: left; box-sizing: border-box;
+}
+.waterfall li img{
+    width: 100%; margin-bottom: 13px;
+}
+.waterfall .btn{
+    text-align: center; margin-top: 20px;
+}
+.waterfall .btn p{
+    display: inline-block; padding: 14px 40px; color: #fff; font-size: 1.2em; text-transform: uppercase; font-weight: bold; border-radius: 3px;
+    cursor: pointer;
+}

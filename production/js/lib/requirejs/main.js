@@ -1,8 +1,11 @@
 requirejs.config({
     baseUrl:"../js/com",
     paths:{
-        jquery:"../js/lib/jquery/jquery-1.11.3",
+        jquery:"../lib/jquery/jquery-1.11.3",
         app:"../app"
     }
 });
-requirejs(["jquery","carousel","app/index"]);
+requirejs(["jquery","carousel","app/index","waterfall","goTop"],function($,Carousel,index,Waterfall,goTop){
+    Carousel.init($("#banner"));
+    Waterfall.init($(".waterfall"));
+});
