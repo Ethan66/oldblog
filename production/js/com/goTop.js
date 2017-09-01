@@ -11,7 +11,7 @@ define(["jquery"],function(){
             var _this=this;
             this.isShow();
             $(window).on("scroll",function(){
-                this.isShow();
+                _this.isShow();
             });
             this.$backtop.on("click",function(){
                $(window).scrollTop(0);
